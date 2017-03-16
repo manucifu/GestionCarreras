@@ -13,6 +13,7 @@ using iTextSharp.text;
 using iTextSharp.text.pdf;
 using System.IO;
 using System.Text.RegularExpressions;
+using System.Data.OleDb;
 
 namespace ProyectoCarreras
 {
@@ -28,6 +29,7 @@ namespace ProyectoCarreras
         {
             dor_generar.Visible = false;
             dor_consulta.Visible = false;
+            cli_alta.Visible = false;
 
         }
         private void button1_Click(object sender, EventArgs e)
@@ -116,18 +118,14 @@ namespace ProyectoCarreras
             dor_generar.Visible = true;
         }
 
-        String aux;
-        Boolean bandera = true;
+        String ultimo = "";
         private void textBox3_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)Keys.Enter)
             {
-                //bandera = true;
-                /*aux = textBox3.Text;
-                String aux = sender.ToString();
-                aux.ToLower();
-                String pablo = Regex.Replace(aux, "([^0-9])", "");
-                textBox3.Text = "";*/
+                ultimo = textBox3.Text;
+                textBox4.Text = ultimo;
+                textBox3.Clear();
             }
         }
 
@@ -138,34 +136,115 @@ namespace ProyectoCarreras
             textBox3.Focus();
         }
 
-        
-        private void textBox3_TextChanged(object sender, EventArgs e)
+        String valor;
+        private void button3_Click(object sender, EventArgs e)
         {
-            if (bandera)
-            {
-                textBox4.Clear();
-                bandera = false;
-                aux = textBox3.Text;
-                textBox3.Clear();
-                
-                
-            }
-            
-            //aux = textBox3.Text;
+            valor = textBox7.Text;
+            OleDbCommand miCmd;
+            OleDbConnection miCnx;
+            String nombre = textBox5.Text;
+            String dni = textBox7.Text;
+            String apellido = textBox6.Text;
+            //String fecha_nac = dateTimePicker1.Value;
 
+            if (apellido != "" && nombre != "" && VerificarNIF(valor))
+            {
+                try
+                {
+                    String conexion = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=|DataDirectory|\\corredores.mdb;Persist Security Info=True";       
+                    string sentencia = "INSERT INTO corredores (nombre, apellidos, dni , fecha_nac ) VALUES('" + nombre + "','" + apellido + "','" + dni + "','" + dateTimePicker1.Value + "')";
+                    miCnx = new OleDbConnection(conexion);
+                    miCmd = new OleDbCommand(sentencia, miCnx);
+                    miCnx.Open();
+                    miCmd.ExecuteNonQuery();
+
+
+                    MessageBox.Show("Cliente insertado");
+
+                    miCnx.Close();
+                }
+                catch (OleDbException err2)
+                {
+                    MessageBox.Show("Error con la base de datos" +err2);
+                }  
+            }
+            else
+            {
+                if (nombre == "")
+                    MessageBox.Show("error Al introducir el nombre");
+                if (apellido == "")
+                    MessageBox.Show("Error al introducir el apellido");
+                if (!VerificarNIF(valor))
+                    MessageBox.Show("DNI incorrecto");
+            }
         }
 
-        private void textBox3_KeyUp(object sender, KeyEventArgs e)
+        public Boolean VerificarNIF(String valor)
         {
+            String aux = null;
+            valor = valor.ToUpper();
+            // ponemos la letra en mayúscula
+            aux = valor.Substring(0, valor.Length - 1);
+            // quitamos la letra del NIF
+            if (aux.Length >= 7 && this.CadenaEsNumero(aux))
+                aux = this.CalculaNIF(aux); // calculamos la letra del NIF para comparar con la que tenemos
+            else
+                return false;
 
-            if (e.KeyValue == (char)Keys.Enter)
+            // comparamos las letras
+            return (valor == aux);
+        }
+
+        public Boolean CadenaEsNumero(String pp)
+        {
+            try
             {
-                textBox4.Text = "";
-                string aux2 = textBox3.Text;       
-                textBox4.Text = aux + aux2;
-                //textBox3.Text = aux + textBox3.Text;
-                bandera = true;
+                int entero = Int32.Parse(pp);
+                return true;
+            }catch(Exception err)
+            {
+                return false;
             }
+        }
+
+        private String CalculaNIF(String strA)
+        {
+            const String cCADENA = "TRWAGMYFPDXBNJZSQVHLCKE";
+            const String cNUMEROS = "0123456789";
+
+            Int32 a = 0;
+            Int32 b = 0;
+            Int32 c = 0;
+            Int32 NIF = 0;
+            StringBuilder sb = new StringBuilder();
+
+            strA = strA.Trim();
+            if (strA.Length == 0) return "";
+
+            // Dejar sólo los números
+            for (int i = 0; i <= strA.Length - 1; i++)
+                if (cNUMEROS.IndexOf(strA[i]) > -1) sb.Append(strA[i]);
+
+            strA = sb.ToString();
+            a = 0;
+            NIF = Convert.ToInt32(strA);
+            do
+            {
+                b = Convert.ToInt32((NIF / 24));
+                c = NIF - (24 * b);
+                a = a + c;
+                NIF = b;
+            } while (b != 0);
+
+            b = Convert.ToInt32((a / 23));
+            c = a - (23 * b);
+            return strA.ToString() + cCADENA.Substring(c, 1);
+        }
+
+        private void altaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            paneles();
+            cli_alta.Visible = true;
         }
     }
 }

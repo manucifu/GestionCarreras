@@ -51,18 +51,30 @@
             this.label2 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.dor_consulta = new System.Windows.Forms.Panel();
+            this.textBox4 = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.cli_alta = new System.Windows.Forms.Panel();
+            this.button_cli_alta = new System.Windows.Forms.Button();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.textBox7 = new System.Windows.Forms.TextBox();
+            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.textBox5 = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.dor_generar.SuspendLayout();
             this.dor_barras.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picturebox1)).BeginInit();
             this.dor_consulta.SuspendLayout();
+            this.cli_alta.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -94,6 +106,7 @@
             this.altaToolStripMenuItem.Name = "altaToolStripMenuItem";
             this.altaToolStripMenuItem.Size = new System.Drawing.Size(171, 26);
             this.altaToolStripMenuItem.Text = "Alta";
+            this.altaToolStripMenuItem.Click += new System.EventHandler(this.altaToolStripMenuItem_Click);
             // 
             // bajaToolStripMenuItem
             // 
@@ -266,6 +279,13 @@
             this.dor_consulta.Size = new System.Drawing.Size(980, 436);
             this.dor_consulta.TabIndex = 1;
             // 
+            // textBox4
+            // 
+            this.textBox4.Location = new System.Drawing.Point(453, 36);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(100, 22);
+            this.textBox4.TabIndex = 6;
+            // 
             // label8
             // 
             this.label8.AutoSize = true;
@@ -313,20 +333,114 @@
             // 
             // textBox3
             // 
-            this.textBox3.Location = new System.Drawing.Point(479, 37);
+            this.textBox3.Location = new System.Drawing.Point(615, 34);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(100, 22);
             this.textBox3.TabIndex = 0;
-            this.textBox3.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
             this.textBox3.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox3_KeyPress);
-            this.textBox3.KeyUp += new System.Windows.Forms.KeyEventHandler(this.textBox3_KeyUp);
             // 
-            // textBox4
+            // cli_alta
             // 
-            this.textBox4.Location = new System.Drawing.Point(715, 35);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(100, 22);
-            this.textBox4.TabIndex = 6;
+            this.cli_alta.Controls.Add(this.button_cli_alta);
+            this.cli_alta.Controls.Add(this.dateTimePicker1);
+            this.cli_alta.Controls.Add(this.textBox7);
+            this.cli_alta.Controls.Add(this.textBox6);
+            this.cli_alta.Controls.Add(this.textBox5);
+            this.cli_alta.Controls.Add(this.label13);
+            this.cli_alta.Controls.Add(this.label12);
+            this.cli_alta.Controls.Add(this.label11);
+            this.cli_alta.Controls.Add(this.label10);
+            this.cli_alta.Controls.Add(this.label9);
+            this.cli_alta.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cli_alta.Location = new System.Drawing.Point(0, 28);
+            this.cli_alta.Name = "cli_alta";
+            this.cli_alta.Size = new System.Drawing.Size(980, 436);
+            this.cli_alta.TabIndex = 7;
+            // 
+            // button_cli_alta
+            // 
+            this.button_cli_alta.Location = new System.Drawing.Point(419, 326);
+            this.button_cli_alta.Name = "button_cli_alta";
+            this.button_cli_alta.Size = new System.Drawing.Size(75, 23);
+            this.button_cli_alta.TabIndex = 9;
+            this.button_cli_alta.Text = "Aceptar";
+            this.button_cli_alta.UseVisualStyleBackColor = true;
+            this.button_cli_alta.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // dateTimePicker1
+            // 
+            this.dateTimePicker1.Location = new System.Drawing.Point(615, 199);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(200, 22);
+            this.dateTimePicker1.TabIndex = 8;
+            this.dateTimePicker1.Value = new System.DateTime(2019, 7, 11, 0, 0, 0, 0);
+            // 
+            // textBox7
+            // 
+            this.textBox7.Location = new System.Drawing.Point(615, 146);
+            this.textBox7.Name = "textBox7";
+            this.textBox7.Size = new System.Drawing.Size(100, 22);
+            this.textBox7.TabIndex = 7;
+            // 
+            // textBox6
+            // 
+            this.textBox6.Location = new System.Drawing.Point(270, 198);
+            this.textBox6.Name = "textBox6";
+            this.textBox6.Size = new System.Drawing.Size(100, 22);
+            this.textBox6.TabIndex = 6;
+            // 
+            // textBox5
+            // 
+            this.textBox5.Location = new System.Drawing.Point(270, 151);
+            this.textBox5.Name = "textBox5";
+            this.textBox5.Size = new System.Drawing.Size(100, 22);
+            this.textBox5.TabIndex = 5;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Location = new System.Drawing.Point(272, 34);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(415, 46);
+            this.label13.TabIndex = 4;
+            this.label13.Text = "Inscripción corredores";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(475, 201);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(119, 17);
+            this.label12.TabIndex = 3;
+            this.label12.Text = "Fecha nacimiento";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(563, 147);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(31, 17);
+            this.label11.TabIndex = 2;
+            this.label11.Text = "DNI";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(190, 204);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(65, 17);
+            this.label10.TabIndex = 1;
+            this.label10.Text = "Apellidos";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(187, 157);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(58, 17);
+            this.label9.TabIndex = 0;
+            this.label9.Text = "Nombre";
             // 
             // Form1
             // 
@@ -334,6 +448,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(980, 464);
             this.Controls.Add(this.dor_consulta);
+            this.Controls.Add(this.cli_alta);
             this.Controls.Add(this.dor_generar);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.menuStrip1);
@@ -349,6 +464,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.picturebox1)).EndInit();
             this.dor_consulta.ResumeLayout(false);
             this.dor_consulta.PerformLayout();
+            this.cli_alta.ResumeLayout(false);
+            this.cli_alta.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -386,6 +503,17 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.Panel cli_alta;
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.TextBox textBox7;
+        private System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.TextBox textBox5;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Button button_cli_alta;
     }
 }
 
