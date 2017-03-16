@@ -28,10 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.correroresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.altaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.bajaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.consultaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.modificaciónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gestionDorsalesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -69,12 +69,39 @@
             this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
+            this.cli_consulta = new System.Windows.Forms.Panel();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.nombreDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.apellidosDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fechanacDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dniDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dorsalDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tiempoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.corredoresBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.corredoresDataSet = new ProyectoCarreras.corredoresDataSet();
+            this.corredoresTableAdapter = new ProyectoCarreras.corredoresDataSetTableAdapters.corredoresTableAdapter();
+            this.cli_modificar = new System.Windows.Forms.Panel();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.textBox8 = new System.Windows.Forms.TextBox();
+            this.textBox9 = new System.Windows.Forms.TextBox();
+            this.textBox10 = new System.Windows.Forms.TextBox();
+            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.menuStrip1.SuspendLayout();
             this.dor_generar.SuspendLayout();
             this.dor_barras.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picturebox1)).BeginInit();
             this.dor_consulta.SuspendLayout();
             this.cli_alta.SuspendLayout();
+            this.cli_consulta.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.corredoresBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.corredoresDataSet)).BeginInit();
+            this.cli_modificar.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -94,7 +121,6 @@
             // 
             this.correroresToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.altaToolStripMenuItem,
-            this.bajaToolStripMenuItem,
             this.consultaToolStripMenuItem,
             this.modificaciónToolStripMenuItem});
             this.correroresToolStripMenuItem.Name = "correroresToolStripMenuItem";
@@ -104,27 +130,23 @@
             // altaToolStripMenuItem
             // 
             this.altaToolStripMenuItem.Name = "altaToolStripMenuItem";
-            this.altaToolStripMenuItem.Size = new System.Drawing.Size(171, 26);
+            this.altaToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
             this.altaToolStripMenuItem.Text = "Alta";
             this.altaToolStripMenuItem.Click += new System.EventHandler(this.altaToolStripMenuItem_Click);
-            // 
-            // bajaToolStripMenuItem
-            // 
-            this.bajaToolStripMenuItem.Name = "bajaToolStripMenuItem";
-            this.bajaToolStripMenuItem.Size = new System.Drawing.Size(171, 26);
-            this.bajaToolStripMenuItem.Text = "Baja";
             // 
             // consultaToolStripMenuItem
             // 
             this.consultaToolStripMenuItem.Name = "consultaToolStripMenuItem";
-            this.consultaToolStripMenuItem.Size = new System.Drawing.Size(171, 26);
-            this.consultaToolStripMenuItem.Text = "Consulta";
+            this.consultaToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.consultaToolStripMenuItem.Text = "Listar";
+            this.consultaToolStripMenuItem.Click += new System.EventHandler(this.consultaToolStripMenuItem_Click);
             // 
             // modificaciónToolStripMenuItem
             // 
             this.modificaciónToolStripMenuItem.Name = "modificaciónToolStripMenuItem";
-            this.modificaciónToolStripMenuItem.Size = new System.Drawing.Size(171, 26);
+            this.modificaciónToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
             this.modificaciónToolStripMenuItem.Text = "Modificación";
+            this.modificaciónToolStripMenuItem.Click += new System.EventHandler(this.modificaciónToolStripMenuItem_Click);
             // 
             // gestionDorsalesToolStripMenuItem
             // 
@@ -442,11 +464,191 @@
             this.label9.TabIndex = 0;
             this.label9.Text = "Nombre";
             // 
+            // cli_consulta
+            // 
+            this.cli_consulta.Controls.Add(this.dataGridView1);
+            this.cli_consulta.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cli_consulta.Location = new System.Drawing.Point(0, 28);
+            this.cli_consulta.Name = "cli_consulta";
+            this.cli_consulta.Size = new System.Drawing.Size(980, 436);
+            this.cli_consulta.TabIndex = 7;
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.AutoGenerateColumns = false;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.nombreDataGridViewTextBoxColumn,
+            this.apellidosDataGridViewTextBoxColumn,
+            this.fechanacDataGridViewTextBoxColumn,
+            this.dniDataGridViewTextBoxColumn,
+            this.dorsalDataGridViewTextBoxColumn,
+            this.tiempoDataGridViewTextBoxColumn});
+            this.dataGridView1.DataSource = this.corredoresBindingSource;
+            this.dataGridView1.Location = new System.Drawing.Point(3, 24);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowTemplate.Height = 24;
+            this.dataGridView1.Size = new System.Drawing.Size(965, 211);
+            this.dataGridView1.TabIndex = 0;
+            // 
+            // nombreDataGridViewTextBoxColumn
+            // 
+            this.nombreDataGridViewTextBoxColumn.DataPropertyName = "nombre";
+            this.nombreDataGridViewTextBoxColumn.HeaderText = "nombre";
+            this.nombreDataGridViewTextBoxColumn.Name = "nombreDataGridViewTextBoxColumn";
+            // 
+            // apellidosDataGridViewTextBoxColumn
+            // 
+            this.apellidosDataGridViewTextBoxColumn.DataPropertyName = "apellidos";
+            this.apellidosDataGridViewTextBoxColumn.HeaderText = "apellidos";
+            this.apellidosDataGridViewTextBoxColumn.Name = "apellidosDataGridViewTextBoxColumn";
+            // 
+            // fechanacDataGridViewTextBoxColumn
+            // 
+            this.fechanacDataGridViewTextBoxColumn.DataPropertyName = "fecha_nac";
+            this.fechanacDataGridViewTextBoxColumn.HeaderText = "fecha_nac";
+            this.fechanacDataGridViewTextBoxColumn.Name = "fechanacDataGridViewTextBoxColumn";
+            // 
+            // dniDataGridViewTextBoxColumn
+            // 
+            this.dniDataGridViewTextBoxColumn.DataPropertyName = "dni";
+            this.dniDataGridViewTextBoxColumn.HeaderText = "dni";
+            this.dniDataGridViewTextBoxColumn.Name = "dniDataGridViewTextBoxColumn";
+            // 
+            // dorsalDataGridViewTextBoxColumn
+            // 
+            this.dorsalDataGridViewTextBoxColumn.DataPropertyName = "dorsal";
+            this.dorsalDataGridViewTextBoxColumn.HeaderText = "dorsal";
+            this.dorsalDataGridViewTextBoxColumn.Name = "dorsalDataGridViewTextBoxColumn";
+            // 
+            // tiempoDataGridViewTextBoxColumn
+            // 
+            this.tiempoDataGridViewTextBoxColumn.DataPropertyName = "tiempo";
+            this.tiempoDataGridViewTextBoxColumn.HeaderText = "tiempo";
+            this.tiempoDataGridViewTextBoxColumn.Name = "tiempoDataGridViewTextBoxColumn";
+            // 
+            // corredoresBindingSource
+            // 
+            this.corredoresBindingSource.DataMember = "corredores";
+            this.corredoresBindingSource.DataSource = this.corredoresDataSet;
+            // 
+            // corredoresDataSet
+            // 
+            this.corredoresDataSet.DataSetName = "corredoresDataSet";
+            this.corredoresDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // corredoresTableAdapter
+            // 
+            this.corredoresTableAdapter.ClearBeforeFill = true;
+            // 
+            // cli_modificar
+            // 
+            this.cli_modificar.Controls.Add(this.dateTimePicker2);
+            this.cli_modificar.Controls.Add(this.textBox10);
+            this.cli_modificar.Controls.Add(this.textBox9);
+            this.cli_modificar.Controls.Add(this.textBox8);
+            this.cli_modificar.Controls.Add(this.comboBox1);
+            this.cli_modificar.Controls.Add(this.label18);
+            this.cli_modificar.Controls.Add(this.label17);
+            this.cli_modificar.Controls.Add(this.label16);
+            this.cli_modificar.Controls.Add(this.label15);
+            this.cli_modificar.Controls.Add(this.label14);
+            this.cli_modificar.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.cli_modificar.Location = new System.Drawing.Point(0, 28);
+            this.cli_modificar.Name = "cli_modificar";
+            this.cli_modificar.Size = new System.Drawing.Size(980, 436);
+            this.cli_modificar.TabIndex = 1;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(148, 154);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(58, 17);
+            this.label14.TabIndex = 0;
+            this.label14.Text = "Nombre";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(563, 151);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(31, 17);
+            this.label15.TabIndex = 1;
+            this.label15.Text = "DNI";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(148, 201);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(65, 17);
+            this.label16.TabIndex = 2;
+            this.label16.Text = "Apellidos";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(475, 198);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(119, 17);
+            this.label17.TabIndex = 3;
+            this.label17.Text = "Fecha nacimiento";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label18.Location = new System.Drawing.Point(246, 47);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(155, 25);
+            this.label18.TabIndex = 4;
+            this.label18.Text = "Buscar Corredor";
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(432, 47);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(189, 24);
+            this.comboBox1.TabIndex = 5;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            // 
+            // textBox8
+            // 
+            this.textBox8.Location = new System.Drawing.Point(647, 145);
+            this.textBox8.Name = "textBox8";
+            this.textBox8.Size = new System.Drawing.Size(100, 22);
+            this.textBox8.TabIndex = 6;
+            // 
+            // textBox9
+            // 
+            this.textBox9.Location = new System.Drawing.Point(251, 154);
+            this.textBox9.Name = "textBox9";
+            this.textBox9.Size = new System.Drawing.Size(100, 22);
+            this.textBox9.TabIndex = 7;
+            // 
+            // textBox10
+            // 
+            this.textBox10.Location = new System.Drawing.Point(251, 199);
+            this.textBox10.Name = "textBox10";
+            this.textBox10.Size = new System.Drawing.Size(100, 22);
+            this.textBox10.TabIndex = 8;
+            // 
+            // dateTimePicker2
+            // 
+            this.dateTimePicker2.Location = new System.Drawing.Point(647, 198);
+            this.dateTimePicker2.Name = "dateTimePicker2";
+            this.dateTimePicker2.Size = new System.Drawing.Size(219, 22);
+            this.dateTimePicker2.TabIndex = 9;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(980, 464);
+            this.Controls.Add(this.cli_modificar);
+            this.Controls.Add(this.cli_consulta);
             this.Controls.Add(this.dor_consulta);
             this.Controls.Add(this.cli_alta);
             this.Controls.Add(this.dor_generar);
@@ -456,6 +658,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.dor_generar.ResumeLayout(false);
@@ -466,6 +669,12 @@
             this.dor_consulta.PerformLayout();
             this.cli_alta.ResumeLayout(false);
             this.cli_alta.PerformLayout();
+            this.cli_consulta.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.corredoresBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.corredoresDataSet)).EndInit();
+            this.cli_modificar.ResumeLayout(false);
+            this.cli_modificar.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -476,7 +685,6 @@
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem correroresToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem altaToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem bajaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem consultaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem modificaciónToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem gestionDorsalesToolStripMenuItem;
@@ -514,6 +722,28 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Button button_cli_alta;
+        private System.Windows.Forms.Panel cli_consulta;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private corredoresDataSet corredoresDataSet;
+        private System.Windows.Forms.BindingSource corredoresBindingSource;
+        private corredoresDataSetTableAdapters.corredoresTableAdapter corredoresTableAdapter;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nombreDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn apellidosDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn fechanacDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dniDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dorsalDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn tiempoDataGridViewTextBoxColumn;
+        private System.Windows.Forms.Panel cli_modificar;
+        private System.Windows.Forms.DateTimePicker dateTimePicker2;
+        private System.Windows.Forms.TextBox textBox10;
+        private System.Windows.Forms.TextBox textBox9;
+        private System.Windows.Forms.TextBox textBox8;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label14;
     }
 }
 

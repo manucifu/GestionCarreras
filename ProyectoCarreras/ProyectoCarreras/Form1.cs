@@ -24,18 +24,21 @@ namespace ProyectoCarreras
         {
             InitializeComponent();
             paneles();
+            ComboDoble();
         }
         private void paneles()
         {
             dor_generar.Visible = false;
             dor_consulta.Visible = false;
             cli_alta.Visible = false;
+            cli_consulta.Visible = false;
+            cli_modificar.Visible = false;
 
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            //Boolean numeroVerdad = false;
-            /*try
+            Boolean numeroVerdad = false;
+            try
             {
                 float.Parse(textBox1.Text);
                 float.Parse(textBox2.Text);
@@ -47,9 +50,8 @@ namespace ProyectoCarreras
             }
 
             if (numeroVerdad)
-            {*/
-            generarCod();
-            //}
+                generarCod();
+            
         }
 
         PictureBox[] pict;
@@ -146,18 +148,18 @@ namespace ProyectoCarreras
             String dni = textBox7.Text;
             String apellido = textBox6.Text;
             //String fecha_nac = dateTimePicker1.Value;
+            String fecha = dateTimePicker1.Value.ToString("dd/MM/yyyy");
 
             if (apellido != "" && nombre != "" && VerificarNIF(valor))
             {
                 try
                 {
                     String conexion = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=|DataDirectory|\\corredores.mdb;Persist Security Info=True";       
-                    string sentencia = "INSERT INTO corredores (nombre, apellidos, dni , fecha_nac ) VALUES('" + nombre + "','" + apellido + "','" + dni + "','" + dateTimePicker1.Value + "')";
+                    string sentencia = "INSERT INTO corredores (nombre, apellidos, dni , fecha_nac ) VALUES('" + nombre + "','" + apellido + "','" + dni + "','" + fecha + "')";
                     miCnx = new OleDbConnection(conexion);
                     miCmd = new OleDbCommand(sentencia, miCnx);
                     miCnx.Open();
                     miCmd.ExecuteNonQuery();
-
 
                     MessageBox.Show("Cliente insertado");
 
@@ -177,6 +179,7 @@ namespace ProyectoCarreras
                 if (!VerificarNIF(valor))
                     MessageBox.Show("DNI incorrecto");
             }
+            
         }
 
         public Boolean VerificarNIF(String valor)
@@ -245,6 +248,79 @@ namespace ProyectoCarreras
         {
             paneles();
             cli_alta.Visible = true;
+        }
+
+        private void consultaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            paneles();
+            cli_consulta.Visible = true;
+            this.corredoresTableAdapter.Fill(this.corredoresDataSet.corredores);
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            // TODO: esta línea de código carga datos en la tabla 'corredoresDataSet.corredores' Puede moverla o quitarla según sea necesario.
+            this.corredoresTableAdapter.Fill(this.corredoresDataSet.corredores);
+
+        }
+
+        private void modificaciónToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            paneles();
+            cli_modificar.Visible = true;
+            ComboDoble();
+        }
+
+        public void ComboDoble()
+        {
+            string conexion = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=|DataDirectory|\\corredores.mdb;Persist Security Info=True";
+            OleDbConnection miCnx = new OleDbConnection(conexion);
+            string sentencia = "SELECT Id, nombre + ' ' + apellidos as completo FROM corredores ORDER BY nombre";
+            OleDbCommand miCmd = new OleDbCommand(sentencia, miCnx);
+            miCnx.Open();
+            OleDbDataAdapter adapter = new OleDbDataAdapter();
+            DataSet ds = new DataSet();
+
+            adapter.SelectCommand = miCmd;
+            adapter.Fill(ds);
+            adapter.Dispose();
+            miCmd.Dispose();
+            comboBox1.DataSource = ds.Tables[0];
+            comboBox1.ValueMember = "Id";
+            comboBox1.DisplayMember = "completo";
+
+            miCnx.Close();
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            OleDbCommand miCmd;
+            OleDbConnection miCnx;
+            OleDbDataReader miLector;
+            try
+            {
+                String conexion = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=|DataDirectory|\\corredores.mdb;Persist Security Info=True";
+                string sentencia = "SELECT nombre, apellidos, dni, fecha_nac from corredores WHERE Id = " + comboBox1.SelectedValue + "";
+                miCnx = new OleDbConnection(conexion);
+                miCmd = new OleDbCommand(sentencia, miCnx);
+                miCnx.Open();
+                miLector = miCmd.ExecuteReader();
+                miLector.Read();
+
+                String nombre = miLector.GetString(0);
+                String precio = miLector.GetString(1);
+
+                textBox5.Text = nombre;
+                textBox6.Text = precio;
+
+                miCnx.Close();
+                miLector.Close();
+
+            }
+            catch (OleDbException err3)
+            {
+                MessageBox.Show("Error con la base de datos " + err3);
+            }
         }
     }
 }
