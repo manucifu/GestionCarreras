@@ -24,7 +24,6 @@ namespace ProyectoCarreras
         {
             InitializeComponent();
             paneles();
-            //ComboDoble();
         }
         private void paneles()
         {
@@ -41,7 +40,6 @@ namespace ProyectoCarreras
             try
             {
                 float.Parse(textBox1.Text);
-                float.Parse(textBox2.Text);
                 numeroVerdad = true;
             }
             catch (Exception err)
@@ -50,14 +48,18 @@ namespace ProyectoCarreras
             }
 
             if (numeroVerdad)
-                generarCod();
+            {
+                InsertarDorsal(Int32.Parse(textBox1.Text));
+                //MessageBox.Show(corredores.Count.ToString());
+                generarCod(corredores.Count);
 
+            }
         }
 
         PictureBox[] pict;
-        private void generarCod()
+        private void generarCod(int vueltas)
         {
-            int vueltas = Int32.Parse(textBox2.Text) - Int32.Parse(textBox1.Text);
+            //int vueltas = Int32.Parse(textBox2.Text) - Int32.Parse(textBox1.Text);
             dor_barras.AutoScroll = true;
 
             PictureBox[] picturebox1 = new PictureBox[vueltas];
@@ -358,7 +360,6 @@ namespace ProyectoCarreras
                     miCmd = new OleDbCommand(sentencia, miCnx);
                     miCnx.Open();
                     miCmd.ExecuteNonQuery();
-
                     miCnx.Close();
 
                     ComboDoble();
@@ -377,6 +378,104 @@ namespace ProyectoCarreras
                     MessageBox.Show("Nombre no valido");
                 if (!VerificarNIF(dni))
                     MessageBox.Show("DNI no valido");
+            }
+        }
+
+        List<Corredor> corredores = new List<Corredor>();
+        public void InsertarDorsal(int numeroDorsal)
+        {
+            corredores.Clear();
+            ConsultaDorsal();
+            int dorNum = numeroDorsal;
+            foreach (Corredor corr in corredores)
+            {
+                OleDbCommand miCmd;
+                OleDbConnection miCnx;
+                try
+                {
+                    String conexion = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=|DataDirectory|\\corredores.mdb;Persist Security Info=True";
+                    string sentencia = "UPDATE corredores SET dorsal='" + dorNum + "' WHERE Id=" + Int32.Parse(corr.getId()) + "";
+                    miCnx = new OleDbConnection(conexion);
+                    miCmd = new OleDbCommand(sentencia, miCnx);
+                    miCnx.Open();
+                    miCmd.ExecuteNonQuery();
+                    miCnx.Close();
+
+                    ComboDoble();
+                }
+                catch (OleDbException err3)
+                {
+                    MessageBox.Show("Error con la base de datos " + err3);
+                }
+                //MessageBox.Show("Corredor modificado");
+
+                dorNum++;
+            }
+            
+        }
+
+        public void ConsultaDorsal()
+        {
+            OleDbCommand miCmd;
+            OleDbConnection miCnx;
+            OleDbDataReader miLector;
+            try
+            {
+                String conexion = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=|DataDirectory|\\corredores.mdb;Persist Security Info=True";
+                string sentencia = "SELECT Id, nombre, apellidos, dni, fecha_nac from corredores";
+                miCnx = new OleDbConnection(conexion);
+                miCmd = new OleDbCommand(sentencia, miCnx);
+                miCnx.Open();
+                miLector = miCmd.ExecuteReader();
+                
+                while (miLector.Read())
+                {
+                    Corredor corr = new Corredor();
+                    corr.setId((miLector.GetInt32(0)).ToString());
+                    corr.setNombre(miLector.GetString(1));
+                    corr.setApellidos(miLector.GetString(2));
+                    corr.setDni(miLector.GetString(3));
+                    corr.setFecha_nac(miLector.GetString(4));
+                    corredores.Add(corr);
+                } 
+                miCnx.Close();
+                miLector.Close();
+
+            }
+            catch (OleDbException err3)
+            {
+                MessageBox.Show("Error con la base de datos " + err3);
+            }
+        }
+
+        private void textBox4_TextChanged(object sender, EventArgs e)
+        {
+            OleDbCommand miCmd;
+            OleDbConnection miCnx;
+            OleDbDataReader miLector;
+            try
+            {
+                String conexion = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=|DataDirectory|\\corredores.mdb;Persist Security Info=True";
+                string sentencia = "SELECT nombre, apellidos, dni, fecha_nac from corredores WHERE dorsal = '" + textBox4.Text + "'";
+                miCnx = new OleDbConnection(conexion);
+                miCmd = new OleDbCommand(sentencia, miCnx);
+                miCnx.Open();
+                miLector = miCmd.ExecuteReader();
+                miLector.Read();
+
+                label19.Text = miLector.GetString(0);
+                label20.Text = miLector.GetString(1);
+                label21.Text = miLector.GetString(3);
+                label22.Text = miLector.GetString(2);
+
+                miCnx.Close();
+                miLector.Close();
+
+            }
+            catch (Exception err3)
+            {
+                MessageBox.Show("Error, no existe registro");
+                Console.Write(err3);
             }
         }
     }
