@@ -14,6 +14,7 @@ using iTextSharp.text.pdf;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Data.OleDb;
+using System.Windows.Forms;
 
 namespace ProyectoCarreras
 {
@@ -24,6 +25,7 @@ namespace ProyectoCarreras
         {
             InitializeComponent();
             paneles();
+            timer1.Stop();
         }
         private void paneles()
         {
@@ -477,6 +479,48 @@ namespace ProyectoCarreras
                 MessageBox.Show("Error, no existe registro");
                 Console.Write(err3);
             }
+        }
+        int seg = 0;
+        int min = 0;
+        int hor = 0;
+        private String mensaje()
+        {
+            String s, m, h;
+            if(seg < 10)
+                s = ":0" + seg.ToString();
+            else
+                s = ":"+ seg.ToString();
+            if (min < 10)
+               m = ":0" + min.ToString();
+            else
+                m = ":" +min.ToString();
+            if (hor < 10)
+                h = "0" + hor.ToString();
+            else
+                h = hor.ToString();
+
+            return  h + m + s;
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            timer1.Start();
+        }
+
+        private void timer1_Tick_1(object sender, EventArgs e)
+        {
+            seg++;
+            if (seg > 59)
+            {
+                min += 1;
+                seg = 0;
+                if (min > 59)
+                {
+                    hor += 1;
+                    min = 0;
+                }
+            }
+            label23.Text = mensaje();
         }
     }
 }
