@@ -81,16 +81,17 @@
             this.corredoresDataSet = new ProyectoCarreras.corredoresDataSet();
             this.corredoresTableAdapter = new ProyectoCarreras.corredoresDataSetTableAdapters.corredoresTableAdapter();
             this.cli_modificar = new System.Windows.Forms.Panel();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
-            this.label18 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.textBox8 = new System.Windows.Forms.TextBox();
-            this.textBox9 = new System.Windows.Forms.TextBox();
-            this.textBox10 = new System.Windows.Forms.TextBox();
             this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
+            this.textBox10 = new System.Windows.Forms.TextBox();
+            this.textBox9 = new System.Windows.Forms.TextBox();
+            this.textBox8 = new System.Windows.Forms.TextBox();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.button3 = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.dor_generar.SuspendLayout();
             this.dor_barras.SuspendLayout();
@@ -130,21 +131,21 @@
             // altaToolStripMenuItem
             // 
             this.altaToolStripMenuItem.Name = "altaToolStripMenuItem";
-            this.altaToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.altaToolStripMenuItem.Size = new System.Drawing.Size(171, 26);
             this.altaToolStripMenuItem.Text = "Alta";
             this.altaToolStripMenuItem.Click += new System.EventHandler(this.altaToolStripMenuItem_Click);
             // 
             // consultaToolStripMenuItem
             // 
             this.consultaToolStripMenuItem.Name = "consultaToolStripMenuItem";
-            this.consultaToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.consultaToolStripMenuItem.Size = new System.Drawing.Size(171, 26);
             this.consultaToolStripMenuItem.Text = "Listar";
             this.consultaToolStripMenuItem.Click += new System.EventHandler(this.consultaToolStripMenuItem_Click);
             // 
             // modificaciónToolStripMenuItem
             // 
             this.modificaciónToolStripMenuItem.Name = "modificaciónToolStripMenuItem";
-            this.modificaciónToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.modificaciónToolStripMenuItem.Size = new System.Drawing.Size(171, 26);
             this.modificaciónToolStripMenuItem.Text = "Modificación";
             this.modificaciónToolStripMenuItem.Click += new System.EventHandler(this.modificaciónToolStripMenuItem_Click);
             // 
@@ -543,6 +544,7 @@
             // 
             // cli_modificar
             // 
+            this.cli_modificar.Controls.Add(this.button3);
             this.cli_modificar.Controls.Add(this.dateTimePicker2);
             this.cli_modificar.Controls.Add(this.textBox10);
             this.cli_modificar.Controls.Add(this.textBox9);
@@ -559,41 +561,43 @@
             this.cli_modificar.Size = new System.Drawing.Size(980, 436);
             this.cli_modificar.TabIndex = 1;
             // 
-            // label14
+            // dateTimePicker2
             // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(148, 154);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(58, 17);
-            this.label14.TabIndex = 0;
-            this.label14.Text = "Nombre";
+            this.dateTimePicker2.CustomFormat = "dd/MM/yyyy";
+            this.dateTimePicker2.Location = new System.Drawing.Point(647, 198);
+            this.dateTimePicker2.Name = "dateTimePicker2";
+            this.dateTimePicker2.Size = new System.Drawing.Size(262, 22);
+            this.dateTimePicker2.TabIndex = 9;
             // 
-            // label15
+            // textBox10
             // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(563, 151);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(31, 17);
-            this.label15.TabIndex = 1;
-            this.label15.Text = "DNI";
+            this.textBox10.Location = new System.Drawing.Point(251, 199);
+            this.textBox10.Name = "textBox10";
+            this.textBox10.Size = new System.Drawing.Size(100, 22);
+            this.textBox10.TabIndex = 8;
             // 
-            // label16
+            // textBox9
             // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(148, 201);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(65, 17);
-            this.label16.TabIndex = 2;
-            this.label16.Text = "Apellidos";
+            this.textBox9.Location = new System.Drawing.Point(251, 154);
+            this.textBox9.Name = "textBox9";
+            this.textBox9.Size = new System.Drawing.Size(100, 22);
+            this.textBox9.TabIndex = 7;
             // 
-            // label17
+            // textBox8
             // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(475, 198);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(119, 17);
-            this.label17.TabIndex = 3;
-            this.label17.Text = "Fecha nacimiento";
+            this.textBox8.Location = new System.Drawing.Point(647, 145);
+            this.textBox8.Name = "textBox8";
+            this.textBox8.Size = new System.Drawing.Size(100, 22);
+            this.textBox8.TabIndex = 6;
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(432, 47);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(315, 24);
+            this.comboBox1.TabIndex = 5;
+            this.comboBox1.SelectionChangeCommitted += new System.EventHandler(this.comboBox1_SelectionChangeCommitted);
             // 
             // label18
             // 
@@ -605,42 +609,51 @@
             this.label18.TabIndex = 4;
             this.label18.Text = "Buscar Corredor";
             // 
-            // comboBox1
+            // label17
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(432, 47);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(189, 24);
-            this.comboBox1.TabIndex = 5;
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(475, 198);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(119, 17);
+            this.label17.TabIndex = 3;
+            this.label17.Text = "Fecha nacimiento";
             // 
-            // textBox8
+            // label16
             // 
-            this.textBox8.Location = new System.Drawing.Point(647, 145);
-            this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(100, 22);
-            this.textBox8.TabIndex = 6;
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(148, 201);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(65, 17);
+            this.label16.TabIndex = 2;
+            this.label16.Text = "Apellidos";
             // 
-            // textBox9
+            // label15
             // 
-            this.textBox9.Location = new System.Drawing.Point(251, 154);
-            this.textBox9.Name = "textBox9";
-            this.textBox9.Size = new System.Drawing.Size(100, 22);
-            this.textBox9.TabIndex = 7;
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(563, 151);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(31, 17);
+            this.label15.TabIndex = 1;
+            this.label15.Text = "DNI";
             // 
-            // textBox10
+            // label14
             // 
-            this.textBox10.Location = new System.Drawing.Point(251, 199);
-            this.textBox10.Name = "textBox10";
-            this.textBox10.Size = new System.Drawing.Size(100, 22);
-            this.textBox10.TabIndex = 8;
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(148, 154);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(58, 17);
+            this.label14.TabIndex = 0;
+            this.label14.Text = "Nombre";
             // 
-            // dateTimePicker2
+            // button3
             // 
-            this.dateTimePicker2.Location = new System.Drawing.Point(647, 198);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(219, 22);
-            this.dateTimePicker2.TabIndex = 9;
+            this.button3.Location = new System.Drawing.Point(432, 297);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.TabIndex = 10;
+            this.button3.Text = "Aceptar";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click_1);
             // 
             // Form1
             // 
@@ -744,6 +757,7 @@
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Button button3;
     }
 }
 

@@ -19,12 +19,12 @@ namespace ProyectoCarreras
 {
     public partial class Form1 : Form
     {
-        
+
         public Form1()
         {
             InitializeComponent();
             paneles();
-            ComboDoble();
+            //ComboDoble();
         }
         private void paneles()
         {
@@ -51,7 +51,7 @@ namespace ProyectoCarreras
 
             if (numeroVerdad)
                 generarCod();
-            
+
         }
 
         PictureBox[] pict;
@@ -60,7 +60,7 @@ namespace ProyectoCarreras
             int vueltas = Int32.Parse(textBox2.Text) - Int32.Parse(textBox1.Text);
             dor_barras.AutoScroll = true;
 
-            PictureBox[]  picturebox1 = new PictureBox[vueltas];
+            PictureBox[] picturebox1 = new PictureBox[vueltas];
             pict = new PictureBox[vueltas];
             int y = 0;
             int imprimir = Int32.Parse(textBox1.Text);
@@ -80,7 +80,8 @@ namespace ProyectoCarreras
                 {
                     picturebox1[index].Location = new Point(0, y);
                     horizontal = false;
-                }else
+                }
+                else
                 {
                     picturebox1[index].Location = new Point(450, y);
                     horizontal = true;
@@ -92,7 +93,7 @@ namespace ProyectoCarreras
                 pict[index].Size = new Size(150, 50);
                 pict[index].Image = codigo.Encode(TYPE.CODE128, imprimir.ToString(), Color.Black, Color.White, 300, 100);
                 imprimir++;
-            }  
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -154,7 +155,7 @@ namespace ProyectoCarreras
             {
                 try
                 {
-                    String conexion = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=|DataDirectory|\\corredores.mdb;Persist Security Info=True";       
+                    String conexion = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=|DataDirectory|\\corredores.mdb;Persist Security Info=True";
                     string sentencia = "INSERT INTO corredores (nombre, apellidos, dni , fecha_nac ) VALUES('" + nombre + "','" + apellido + "','" + dni + "','" + fecha + "')";
                     miCnx = new OleDbConnection(conexion);
                     miCmd = new OleDbCommand(sentencia, miCnx);
@@ -167,8 +168,8 @@ namespace ProyectoCarreras
                 }
                 catch (OleDbException err2)
                 {
-                    MessageBox.Show("Error con la base de datos" +err2);
-                }  
+                    MessageBox.Show("Error con la base de datos" + err2);
+                }
             }
             else
             {
@@ -179,23 +180,28 @@ namespace ProyectoCarreras
                 if (!VerificarNIF(valor))
                     MessageBox.Show("DNI incorrecto");
             }
-            
+
         }
 
         public Boolean VerificarNIF(String valor)
         {
-            String aux = null;
-            valor = valor.ToUpper();
-            // ponemos la letra en mayúscula
-            aux = valor.Substring(0, valor.Length - 1);
-            // quitamos la letra del NIF
-            if (aux.Length >= 7 && this.CadenaEsNumero(aux))
-                aux = this.CalculaNIF(aux); // calculamos la letra del NIF para comparar con la que tenemos
-            else
+            if (valor == "")
+            {
                 return false;
-
-            // comparamos las letras
-            return (valor == aux);
+            }else
+            {
+                String aux = null;
+                valor = valor.ToUpper();
+                // ponemos la letra en mayúscula
+                aux = valor.Substring(0, valor.Length - 1);
+                // quitamos la letra del NIF
+                if (aux.Length >= 7 && this.CadenaEsNumero(aux))
+                    aux = this.CalculaNIF(aux); // calculamos la letra del NIF para comparar con la que tenemos
+                else
+                    return false;
+                // comparamos las letras
+                return (valor == aux);
+            }
         }
 
         public Boolean CadenaEsNumero(String pp)
@@ -204,7 +210,8 @@ namespace ProyectoCarreras
             {
                 int entero = Int32.Parse(pp);
                 return true;
-            }catch(Exception err)
+            }
+            catch (Exception err)
             {
                 return false;
             }
@@ -292,7 +299,7 @@ namespace ProyectoCarreras
             miCnx.Close();
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private void comboBox1_SelectionChangeCommitted(object sender, EventArgs e)
         {
             OleDbCommand miCmd;
             OleDbConnection miCnx;
@@ -308,10 +315,19 @@ namespace ProyectoCarreras
                 miLector.Read();
 
                 String nombre = miLector.GetString(0);
-                String precio = miLector.GetString(1);
+                String apellidos = miLector.GetString(1);
+                String dni = miLector.GetString(2);
+                String fecha = miLector.GetString(3);
 
-                textBox5.Text = nombre;
-                textBox6.Text = precio;
+                //separo el dia, mes y año de la fecha para a continuacion introducirla en el datetimePicker
+                int dia = Int32.Parse(fecha.Substring(0, 2));
+                int mes = Int32.Parse(fecha.Substring(3, 2));
+                int anio = Int32.Parse(fecha.Substring(6, 4));
+
+                textBox9.Text = nombre;
+                textBox10.Text = apellidos;
+                textBox8.Text = dni;
+                dateTimePicker2.Value = new DateTime(anio, mes, dia);
 
                 miCnx.Close();
                 miLector.Close();
@@ -320,6 +336,47 @@ namespace ProyectoCarreras
             catch (OleDbException err3)
             {
                 MessageBox.Show("Error con la base de datos " + err3);
+            }
+        }
+
+        private void button3_Click_1(object sender, EventArgs e)
+        {
+            OleDbCommand miCmd;
+            OleDbConnection miCnx;
+            OleDbDataReader miLector;
+            String nombre = textBox9.Text;
+            String apellido = textBox10.Text;
+            String dni = textBox8.Text;
+
+            if (apellido != "" && nombre != "" && VerificarNIF(dni))
+            {
+                try
+                {
+                    String conexion = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=|DataDirectory|\\corredores.mdb;Persist Security Info=True";
+                    string sentencia = "UPDATE corredores SET nombre='" + nombre + "', apellidos='" + apellido + "', dni='" + dni + "' , fecha_nac='" + dateTimePicker2.Value.ToShortDateString() + "' WHERE Id=" + comboBox1.SelectedValue + "";
+                    miCnx = new OleDbConnection(conexion);
+                    miCmd = new OleDbCommand(sentencia, miCnx);
+                    miCnx.Open();
+                    miCmd.ExecuteNonQuery();
+
+                    miCnx.Close();
+
+                    ComboDoble();
+                }
+                catch (OleDbException err3)
+                {
+                    MessageBox.Show("Error con la base de datos " + err3);
+                }
+                MessageBox.Show("Corredor modificado");
+            }
+            else
+            {
+                if (apellido == "")
+                    MessageBox.Show("Apellido no valido");
+                if (nombre == "")
+                    MessageBox.Show("Nombre no valido");
+                if (!VerificarNIF(dni))
+                    MessageBox.Show("DNI no valido");
             }
         }
     }
