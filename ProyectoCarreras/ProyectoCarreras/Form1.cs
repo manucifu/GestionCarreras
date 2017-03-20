@@ -34,6 +34,7 @@ namespace ProyectoCarreras
             cli_alta.Visible = false;
             cli_consulta.Visible = false;
             cli_modificar.Visible = false;
+            car_iniciar.Visible = false;
 
         }
         private void button1_Click(object sender, EventArgs e)
@@ -505,6 +506,7 @@ namespace ProyectoCarreras
         private void button4_Click(object sender, EventArgs e)
         {
             timer1.Start();
+            textBox12.Focus();
         }
 
         private void timer1_Tick_1(object sender, EventArgs e)
@@ -520,7 +522,76 @@ namespace ProyectoCarreras
                     min = 0;
                 }
             }
-            label23.Text = mensaje();
+            lbl_tiempo.Text = mensaje();
+        }
+
+        private void iniciarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            paneles();
+            car_iniciar.Visible = true;
+            textBox12.Focus();
+        }
+
+        private void textBox12_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                label31.Text = lbl_tiempo.Text;
+                label34.Text = textBox12.Text;
+                tiempoCorredor();
+                textBox12.Clear();
+            }
+        }
+        private void tiempoCorredor()
+        {
+            OleDbCommand miCmd;
+            OleDbConnection miCnx;
+            try
+            {
+                String conexion = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=|DataDirectory|\\corredores.mdb;Persist Security Info=True";
+                string sentencia = "UPDATE corredores SET tiempo='" + label31.Text + "' WHERE dorsal='" + label34.Text + "'";
+                miCnx = new OleDbConnection(conexion);
+                miCmd = new OleDbCommand(sentencia, miCnx);
+                miCnx.Open();
+                miCmd.ExecuteNonQuery();
+                miCnx.Close();
+
+                ComboDoble();
+            }
+            catch (OleDbException err3)
+            {
+                MessageBox.Show("Error con la base de datos " + err3);
+            }
+        }
+
+        private void label34_TextChanged(object sender, EventArgs e)
+        {
+            OleDbCommand miCmd;
+            OleDbConnection miCnx;
+            OleDbDataReader miLector;
+            try
+            {
+                String conexion = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=|DataDirectory|\\corredores.mdb;Persist Security Info=True";
+                string sentencia = "SELECT nombre, apellidos, dni from corredores WHERE dorsal = '" + label34.Text + "'";
+                miCnx = new OleDbConnection(conexion);
+                miCmd = new OleDbCommand(sentencia, miCnx);
+                miCnx.Open();
+                miLector = miCmd.ExecuteReader();
+                miLector.Read();
+
+                label28.Text = miLector.GetString(0);
+                label29.Text = miLector.GetString(1);
+                label30.Text = miLector.GetString(2);
+
+                miCnx.Close();
+                miLector.Close();
+
+            }
+            catch (Exception err3)
+            {
+                //MessageBox.Show("Error, no existe registro");
+                Console.Write(err3);
+            }
         }
     }
 }
