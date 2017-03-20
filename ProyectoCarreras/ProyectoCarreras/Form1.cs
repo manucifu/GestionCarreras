@@ -35,7 +35,9 @@ namespace ProyectoCarreras
             cli_consulta.Visible = false;
             cli_modificar.Visible = false;
             car_iniciar.Visible = false;
-
+            car_activa.Visible = false;
+            car_alta.Visible = false;
+            car_mod.Visible = false;
         }
         private void button1_Click(object sender, EventArgs e)
         {
@@ -156,35 +158,58 @@ namespace ProyectoCarreras
             //String fecha_nac = dateTimePicker1.Value;
             String fecha = dateTimePicker1.Value.ToString("dd/MM/yyyy");
 
-            if (apellido != "" && nombre != "" && VerificarNIF(valor))
+            if (!ExisteCorredor)
+            {
+                if (apellido != "" && nombre != "" && VerificarNIF(valor))
+                {
+                    try
+                    {
+                        String conexion = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=|DataDirectory|\\corredores.mdb;Persist Security Info=True";
+                        string sentencia = "INSERT INTO corredores (nombre, apellidos, dni , fecha_nac ) VALUES('" + nombre + "','" + apellido + "','" + dni + "','" + fecha + "')";
+                        miCnx = new OleDbConnection(conexion);
+                        miCmd = new OleDbCommand(sentencia, miCnx);
+                        miCnx.Open();
+                        miCmd.ExecuteNonQuery();
+
+                        MessageBox.Show("Cliente insertado");
+
+                        miCnx.Close();
+                    }
+                    catch (OleDbException err2)
+                    {
+                        MessageBox.Show("Error con la base de datos" + err2);
+                    }
+                }
+                else
+                {
+                    if (nombre == "")
+                        MessageBox.Show("error Al introducir el nombre");
+                    if (apellido == "")
+                        MessageBox.Show("Error al introducir el apellido");
+                    if (!VerificarNIF(valor))
+                        MessageBox.Show("DNI incorrecto");
+                }
+            }else
             {
                 try
                 {
                     String conexion = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=|DataDirectory|\\corredores.mdb;Persist Security Info=True";
-                    string sentencia = "INSERT INTO corredores (nombre, apellidos, dni , fecha_nac ) VALUES('" + nombre + "','" + apellido + "','" + dni + "','" + fecha + "')";
+                    string sentencia = "UPDATE corredores SET activo='true' WHERE dni='" + textBox7.Text + "'";
                     miCnx = new OleDbConnection(conexion);
                     miCmd = new OleDbCommand(sentencia, miCnx);
                     miCnx.Open();
                     miCmd.ExecuteNonQuery();
 
-                    MessageBox.Show("Cliente insertado");
+                    MessageBox.Show("Corredor insertado");
 
                     miCnx.Close();
                 }
                 catch (OleDbException err2)
                 {
-                    MessageBox.Show("Error con la base de datos" + err2);
+                    //MessageBox.Show("Error con la base de datos" + err2);
                 }
             }
-            else
-            {
-                if (nombre == "")
-                    MessageBox.Show("error Al introducir el nombre");
-                if (apellido == "")
-                    MessageBox.Show("Error al introducir el apellido");
-                if (!VerificarNIF(valor))
-                    MessageBox.Show("DNI incorrecto");
-            }
+            
 
         }
 
@@ -260,6 +285,15 @@ namespace ProyectoCarreras
         {
             paneles();
             cli_alta.Visible = true;
+            desabilitarTexto();
+        }
+
+        private void desabilitarTexto()
+        {
+            textBox5.Enabled = false;
+            textBox6.Enabled = false;
+            dateTimePicker1.Enabled = false;
+            comboBox2.Enabled = false;
         }
 
         private void consultaToolStripMenuItem_Click(object sender, EventArgs e)
@@ -271,8 +305,7 @@ namespace ProyectoCarreras
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            // TODO: esta línea de código carga datos en la tabla 'corredoresDataSet.corredores' Puede moverla o quitarla según sea necesario.
-            this.corredoresTableAdapter.Fill(this.corredoresDataSet.corredores);
+            
 
         }
 
@@ -592,6 +625,90 @@ namespace ProyectoCarreras
                 //MessageBox.Show("Error, no existe registro");
                 Console.Write(err3);
             }
+        }
+        Boolean ExisteCorredor = false;
+        private void textBox7_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                OleDbCommand miCmd;
+                OleDbConnection miCnx;
+                OleDbDataReader miLector;
+                try
+                {
+                    String conexion = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=|DataDirectory|\\corredores.mdb;Persist Security Info=True";
+                    string sentencia = "SELECT nombre, apellidos, fecha_nac, sexo from corredores WHERE dni = '" + textBox7.Text + "'";
+                    miCnx = new OleDbConnection(conexion);
+                    miCmd = new OleDbCommand(sentencia, miCnx);
+                    miCnx.Open();
+                    miLector = miCmd.ExecuteReader();
+                    miLector.Read();
+
+                    textBox5.Text = miLector.GetString(0);
+                    textBox6.Text = miLector.GetString(1);
+                    String fecha = miLector.GetString(2);
+                    int dia = Int32.Parse(fecha.Substring(0, 2));
+                    int mes = Int32.Parse(fecha.Substring(3, 2));
+                    int anio = Int32.Parse(fecha.Substring(6, 4));
+                    dateTimePicker1.Value = new DateTime(anio, mes, dia);
+
+                    miCnx.Close();
+                    miLector.Close();
+                    ExisteCorredor = true;
+
+                }
+                catch (Exception err3)
+                {
+                    MessageBox.Show("No existe el corredor, agrege uno nuevo");
+                    Console.Write(err3);
+                    textBox5.Enabled = true;
+                    textBox6.Enabled = true;
+                    comboBox2.Enabled = true;
+                    dateTimePicker1.Enabled = true;
+                    ExisteCorredor = false;
+                }
+            }
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            OleDbCommand miCmd;
+            OleDbConnection miCnx;
+            try
+            {
+                String conexion = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=|DataDirectory|\\corredores.mdb;Persist Security Info=True";
+                string sentencia = "INSERT INTO carrera (nombre, anio) VALUES('" + textBox11.Text + "','" + dateTimePicker3.Value.ToShortDateString()+ "')";
+                miCnx = new OleDbConnection(conexion);
+                miCmd = new OleDbCommand(sentencia, miCnx);
+                miCnx.Open();
+                miCmd.ExecuteNonQuery();
+
+                MessageBox.Show("Carrera insertada");
+
+                miCnx.Close();
+            }
+            catch (OleDbException err2)
+            {
+                MessageBox.Show("Error con la base de datos" + err2);
+            }
+        }
+
+        private void altaToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            paneles();
+            car_alta.Visible = true;
+        }
+
+        private void gestiónActivaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            paneles();
+            car_activa.Visible = true;
+        }
+
+        private void modificaciónToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            paneles();
+            car_mod.Visible = true;
         }
     }
 }

@@ -40,6 +40,9 @@
             this.carreraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.iniciarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.informesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.altaToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.modificaciónToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.gestiónActivaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label1 = new System.Windows.Forms.Label();
             this.dor_generar = new System.Windows.Forms.Panel();
             this.dor_barras = new System.Windows.Forms.Panel();
@@ -63,6 +66,8 @@
             this.label4 = new System.Windows.Forms.Label();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.cli_alta = new System.Windows.Forms.Panel();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.label23 = new System.Windows.Forms.Label();
             this.button_cli_alta = new System.Windows.Forms.Button();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.textBox7 = new System.Windows.Forms.TextBox();
@@ -97,6 +102,7 @@
             this.label15 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.car_iniciar = new System.Windows.Forms.Panel();
+            this.label34 = new System.Windows.Forms.Label();
             this.label33 = new System.Windows.Forms.Label();
             this.textBox12 = new System.Windows.Forms.TextBox();
             this.label32 = new System.Windows.Forms.Label();
@@ -113,7 +119,19 @@
             this.button4 = new System.Windows.Forms.Button();
             this.corredoresDataSet1 = new ProyectoCarreras.corredoresDataSet();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.label34 = new System.Windows.Forms.Label();
+            this.car_alta = new System.Windows.Forms.Panel();
+            this.dateTimePicker3 = new System.Windows.Forms.DateTimePicker();
+            this.button7 = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
+            this.textBox11 = new System.Windows.Forms.TextBox();
+            this.label36 = new System.Windows.Forms.Label();
+            this.label35 = new System.Windows.Forms.Label();
+            this.car_activa = new System.Windows.Forms.Panel();
+            this.label37 = new System.Windows.Forms.Label();
+            this.label38 = new System.Windows.Forms.Label();
+            this.label39 = new System.Windows.Forms.Label();
+            this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
+            this.car_mod = new System.Windows.Forms.Panel();
             this.menuStrip1.SuspendLayout();
             this.dor_generar.SuspendLayout();
             this.dor_barras.SuspendLayout();
@@ -127,6 +145,8 @@
             this.cli_modificar.SuspendLayout();
             this.car_iniciar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.corredoresDataSet1)).BeginInit();
+            this.car_alta.SuspendLayout();
+            this.car_activa.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -200,7 +220,10 @@
             // 
             this.carreraToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.iniciarToolStripMenuItem,
-            this.informesToolStripMenuItem});
+            this.informesToolStripMenuItem,
+            this.altaToolStripMenuItem2,
+            this.modificaciónToolStripMenuItem1,
+            this.gestiónActivaToolStripMenuItem});
             this.carreraToolStripMenuItem.Name = "carreraToolStripMenuItem";
             this.carreraToolStripMenuItem.Size = new System.Drawing.Size(69, 24);
             this.carreraToolStripMenuItem.Text = "Carrera";
@@ -217,6 +240,27 @@
             this.informesToolStripMenuItem.Name = "informesToolStripMenuItem";
             this.informesToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
             this.informesToolStripMenuItem.Text = "Informes";
+            // 
+            // altaToolStripMenuItem2
+            // 
+            this.altaToolStripMenuItem2.Name = "altaToolStripMenuItem2";
+            this.altaToolStripMenuItem2.Size = new System.Drawing.Size(181, 26);
+            this.altaToolStripMenuItem2.Text = "Alta";
+            this.altaToolStripMenuItem2.Click += new System.EventHandler(this.altaToolStripMenuItem2_Click);
+            // 
+            // modificaciónToolStripMenuItem1
+            // 
+            this.modificaciónToolStripMenuItem1.Name = "modificaciónToolStripMenuItem1";
+            this.modificaciónToolStripMenuItem1.Size = new System.Drawing.Size(181, 26);
+            this.modificaciónToolStripMenuItem1.Text = "Modificación";
+            this.modificaciónToolStripMenuItem1.Click += new System.EventHandler(this.modificaciónToolStripMenuItem1_Click);
+            // 
+            // gestiónActivaToolStripMenuItem
+            // 
+            this.gestiónActivaToolStripMenuItem.Name = "gestiónActivaToolStripMenuItem";
+            this.gestiónActivaToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.gestiónActivaToolStripMenuItem.Text = "Gestión Activa";
+            this.gestiónActivaToolStripMenuItem.Click += new System.EventHandler(this.gestiónActivaToolStripMenuItem_Click);
             // 
             // label1
             // 
@@ -426,6 +470,8 @@
             // 
             // cli_alta
             // 
+            this.cli_alta.Controls.Add(this.comboBox2);
+            this.cli_alta.Controls.Add(this.label23);
             this.cli_alta.Controls.Add(this.button_cli_alta);
             this.cli_alta.Controls.Add(this.dateTimePicker1);
             this.cli_alta.Controls.Add(this.textBox7);
@@ -442,6 +488,26 @@
             this.cli_alta.Size = new System.Drawing.Size(980, 436);
             this.cli_alta.TabIndex = 7;
             // 
+            // comboBox2
+            // 
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Items.AddRange(new object[] {
+            "Hombre",
+            "Mujer"});
+            this.comboBox2.Location = new System.Drawing.Point(267, 245);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(121, 24);
+            this.comboBox2.TabIndex = 11;
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(203, 248);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(39, 17);
+            this.label23.TabIndex = 10;
+            this.label23.Text = "Sexo";
+            // 
             // button_cli_alta
             // 
             this.button_cli_alta.Location = new System.Drawing.Point(419, 326);
@@ -454,18 +520,21 @@
             // 
             // dateTimePicker1
             // 
+            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dateTimePicker1.Location = new System.Drawing.Point(615, 199);
             this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(200, 22);
+            this.dateTimePicker1.Size = new System.Drawing.Size(132, 22);
             this.dateTimePicker1.TabIndex = 8;
             this.dateTimePicker1.Value = new System.DateTime(2019, 7, 11, 0, 0, 0, 0);
             // 
             // textBox7
             // 
             this.textBox7.Location = new System.Drawing.Point(615, 146);
+            this.textBox7.MaxLength = 9;
             this.textBox7.Name = "textBox7";
             this.textBox7.Size = new System.Drawing.Size(100, 22);
             this.textBox7.TabIndex = 7;
+            this.textBox7.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox7_KeyPress);
             // 
             // textBox6
             // 
@@ -636,9 +705,10 @@
             // dateTimePicker2
             // 
             this.dateTimePicker2.CustomFormat = "dd/MM/yyyy";
+            this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dateTimePicker2.Location = new System.Drawing.Point(647, 198);
             this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(262, 22);
+            this.dateTimePicker2.Size = new System.Drawing.Size(139, 22);
             this.dateTimePicker2.TabIndex = 9;
             // 
             // textBox10
@@ -739,6 +809,16 @@
             this.car_iniciar.Name = "car_iniciar";
             this.car_iniciar.Size = new System.Drawing.Size(980, 436);
             this.car_iniciar.TabIndex = 11;
+            // 
+            // label34
+            // 
+            this.label34.AutoSize = true;
+            this.label34.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label34.Location = new System.Drawing.Point(526, 183);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(0, 20);
+            this.label34.TabIndex = 15;
+            this.label34.TextChanged += new System.EventHandler(this.label34_TextChanged);
             // 
             // label33
             // 
@@ -891,27 +971,142 @@
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick_1);
             // 
-            // label34
+            // car_alta
             // 
-            this.label34.AutoSize = true;
-            this.label34.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label34.Location = new System.Drawing.Point(526, 183);
-            this.label34.Name = "label34";
-            this.label34.Size = new System.Drawing.Size(0, 20);
-            this.label34.TabIndex = 15;
-            this.label34.TextChanged += new System.EventHandler(this.label34_TextChanged);
+            this.car_alta.Controls.Add(this.dateTimePicker3);
+            this.car_alta.Controls.Add(this.button7);
+            this.car_alta.Controls.Add(this.button6);
+            this.car_alta.Controls.Add(this.textBox11);
+            this.car_alta.Controls.Add(this.label36);
+            this.car_alta.Controls.Add(this.label35);
+            this.car_alta.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.car_alta.Location = new System.Drawing.Point(0, 28);
+            this.car_alta.Name = "car_alta";
+            this.car_alta.Size = new System.Drawing.Size(980, 436);
+            this.car_alta.TabIndex = 12;
+            // 
+            // dateTimePicker3
+            // 
+            this.dateTimePicker3.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateTimePicker3.Location = new System.Drawing.Point(441, 152);
+            this.dateTimePicker3.Name = "dateTimePicker3";
+            this.dateTimePicker3.Size = new System.Drawing.Size(143, 22);
+            this.dateTimePicker3.TabIndex = 6;
+            this.dateTimePicker3.Value = new System.DateTime(2017, 3, 15, 0, 0, 0, 0);
+            // 
+            // button7
+            // 
+            this.button7.Location = new System.Drawing.Point(335, 272);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(75, 23);
+            this.button7.TabIndex = 5;
+            this.button7.Text = "Cancelar";
+            this.button7.UseVisualStyleBackColor = true;
+            // 
+            // button6
+            // 
+            this.button6.Location = new System.Drawing.Point(478, 272);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(75, 23);
+            this.button6.TabIndex = 4;
+            this.button6.Text = "Aceptar";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
+            // textBox11
+            // 
+            this.textBox11.Location = new System.Drawing.Point(441, 103);
+            this.textBox11.Name = "textBox11";
+            this.textBox11.Size = new System.Drawing.Size(214, 22);
+            this.textBox11.TabIndex = 2;
+            // 
+            // label36
+            // 
+            this.label36.AutoSize = true;
+            this.label36.Location = new System.Drawing.Point(318, 156);
+            this.label36.Name = "label36";
+            this.label36.Size = new System.Drawing.Size(97, 17);
+            this.label36.TabIndex = 1;
+            this.label36.Text = "Fecha carrera";
+            // 
+            // label35
+            // 
+            this.label35.AutoSize = true;
+            this.label35.Location = new System.Drawing.Point(348, 108);
+            this.label35.Name = "label35";
+            this.label35.Size = new System.Drawing.Size(58, 17);
+            this.label35.TabIndex = 0;
+            this.label35.Text = "Nombre";
+            // 
+            // car_activa
+            // 
+            this.car_activa.Controls.Add(this.checkedListBox1);
+            this.car_activa.Controls.Add(this.label39);
+            this.car_activa.Controls.Add(this.label38);
+            this.car_activa.Controls.Add(this.label37);
+            this.car_activa.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.car_activa.Location = new System.Drawing.Point(0, 28);
+            this.car_activa.Name = "car_activa";
+            this.car_activa.Size = new System.Drawing.Size(980, 436);
+            this.car_activa.TabIndex = 7;
+            // 
+            // label37
+            // 
+            this.label37.AutoSize = true;
+            this.label37.Location = new System.Drawing.Point(100, 24);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(58, 17);
+            this.label37.TabIndex = 0;
+            this.label37.Text = "Nombre";
+            // 
+            // label38
+            // 
+            this.label38.AutoSize = true;
+            this.label38.Location = new System.Drawing.Point(212, 24);
+            this.label38.Name = "label38";
+            this.label38.Size = new System.Drawing.Size(47, 17);
+            this.label38.TabIndex = 1;
+            this.label38.Text = "Fecha";
+            // 
+            // label39
+            // 
+            this.label39.AutoSize = true;
+            this.label39.Location = new System.Drawing.Point(323, 24);
+            this.label39.Name = "label39";
+            this.label39.Size = new System.Drawing.Size(46, 17);
+            this.label39.TabIndex = 2;
+            this.label39.Text = "Activo";
+            // 
+            // checkedListBox1
+            // 
+            this.checkedListBox1.FormattingEnabled = true;
+            this.checkedListBox1.Location = new System.Drawing.Point(600, 62);
+            this.checkedListBox1.Name = "checkedListBox1";
+            this.checkedListBox1.Size = new System.Drawing.Size(229, 123);
+            this.checkedListBox1.TabIndex = 4;
+            // 
+            // car_mod
+            // 
+            this.car_mod.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.car_mod.Location = new System.Drawing.Point(0, 28);
+            this.car_mod.Name = "car_mod";
+            this.car_mod.Size = new System.Drawing.Size(980, 436);
+            this.car_mod.TabIndex = 7;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(980, 464);
-            this.Controls.Add(this.car_iniciar);
-            this.Controls.Add(this.dor_consulta);
-            this.Controls.Add(this.dor_generar);
+            this.Controls.Add(this.car_activa);
+            this.Controls.Add(this.car_alta);
+            this.Controls.Add(this.car_mod);
             this.Controls.Add(this.cli_modificar);
-            this.Controls.Add(this.cli_consulta);
             this.Controls.Add(this.cli_alta);
+            this.Controls.Add(this.dor_consulta);
+            this.Controls.Add(this.car_iniciar);
+            this.Controls.Add(this.dor_generar);
+            this.Controls.Add(this.cli_consulta);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -938,6 +1133,10 @@
             this.car_iniciar.ResumeLayout(false);
             this.car_iniciar.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.corredoresDataSet1)).EndInit();
+            this.car_alta.ResumeLayout(false);
+            this.car_alta.PerformLayout();
+            this.car_activa.ResumeLayout(false);
+            this.car_activa.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1030,6 +1229,24 @@
         private System.Windows.Forms.TextBox textBox12;
         private System.Windows.Forms.Label label32;
         private System.Windows.Forms.Label label34;
+        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.ToolStripMenuItem altaToolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem modificaciónToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem gestiónActivaToolStripMenuItem;
+        private System.Windows.Forms.Panel car_alta;
+        private System.Windows.Forms.TextBox textBox11;
+        private System.Windows.Forms.Label label36;
+        private System.Windows.Forms.Label label35;
+        private System.Windows.Forms.DateTimePicker dateTimePicker3;
+        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Panel car_activa;
+        private System.Windows.Forms.Label label39;
+        private System.Windows.Forms.Label label38;
+        private System.Windows.Forms.Label label37;
+        private System.Windows.Forms.CheckedListBox checkedListBox1;
+        private System.Windows.Forms.Panel car_mod;
     }
 }
 
