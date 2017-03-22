@@ -165,14 +165,17 @@ namespace ProyectoCarreras
                     try
                     {
                         String conexion = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=|DataDirectory|\\corredores.mdb;Persist Security Info=True";
-                        string sentencia = "INSERT INTO corredores (nombre, apellidos, dni , fecha_nac ) VALUES('" + nombre + "','" + apellido + "','" + dni + "','" + fecha + "')";
+                        string sentencia = "INSERT INTO corredores (nombre, apellidos, dni , fecha_nac, activo, sexo ) VALUES('" + nombre + "','" + apellido + "','" + dni + "','" + fecha + "', true , '"+ comboBox2.Text + "')";
                         miCnx = new OleDbConnection(conexion);
                         miCmd = new OleDbCommand(sentencia, miCnx);
                         miCnx.Open();
                         miCmd.ExecuteNonQuery();
 
-                        MessageBox.Show("Cliente insertado");
+                        MessageBox.Show("Corredor insertado correctamente");
 
+                        textBox5.Clear();
+                        textBox6.Clear();
+                        textBox7.Clear();
                         miCnx.Close();
                     }
                     catch (OleDbException err2)
@@ -194,13 +197,13 @@ namespace ProyectoCarreras
                 try
                 {
                     String conexion = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=|DataDirectory|\\corredores.mdb;Persist Security Info=True";
-                    string sentencia = "UPDATE corredores SET activo='true' WHERE dni='" + textBox7.Text + "'";
+                    string sentencia = "UPDATE corredores SET activo= true WHERE dni='" + textBox7.Text + "'";
                     miCnx = new OleDbConnection(conexion);
                     miCmd = new OleDbCommand(sentencia, miCnx);
                     miCnx.Open();
                     miCmd.ExecuteNonQuery();
 
-                    MessageBox.Show("Corredor insertado");
+                    MessageBox.Show("Corredor activo");
 
                     miCnx.Close();
                 }
@@ -208,6 +211,16 @@ namespace ProyectoCarreras
                 {
                     //MessageBox.Show("Error con la base de datos" + err2);
                 }
+
+                textBox5.Clear();
+                textBox6.Clear();
+                textBox7.Clear();
+
+                textBox5.Enabled = false;
+                textBox6.Enabled = false;
+                textBox7.Enabled = false;
+                dateTimePicker1.Enabled = false;
+                comboBox2.Enabled = false;
             }
             
 
@@ -300,12 +313,18 @@ namespace ProyectoCarreras
         {
             paneles();
             cli_consulta.Visible = true;
-            this.corredoresTableAdapter.Fill(this.corredoresDataSet.corredores);
+            this.corredoresTableAdapter1.Fill(this.corredoresDataSet11.corredores);
+            dataGridView1.Columns[0].Visible = false;
+
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            
+            // TODO: esta línea de código carga datos en la tabla 'corredoresDataSet2.corredores' Puede moverla o quitarla según sea necesario.
+            this.corredoresTableAdapter2.Fill(this.corredoresDataSet2.corredores);
+            // TODO: esta línea de código carga datos en la tabla 'corredoresDataSet11.corredores' Puede moverla o quitarla según sea necesario.
+            this.corredoresTableAdapter1.Fill(this.corredoresDataSet11.corredores);
+
 
         }
 
@@ -345,7 +364,7 @@ namespace ProyectoCarreras
             try
             {
                 String conexion = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=|DataDirectory|\\corredores.mdb;Persist Security Info=True";
-                string sentencia = "SELECT nombre, apellidos, dni, fecha_nac from corredores WHERE Id = " + comboBox1.SelectedValue + "";
+                string sentencia = "SELECT nombre, apellidos, dni, fecha_nac, sexo from corredores WHERE Id = " + comboBox1.SelectedValue + "";
                 miCnx = new OleDbConnection(conexion);
                 miCmd = new OleDbCommand(sentencia, miCnx);
                 miCnx.Open();
@@ -356,7 +375,7 @@ namespace ProyectoCarreras
                 String apellidos = miLector.GetString(1);
                 String dni = miLector.GetString(2);
                 String fecha = miLector.GetString(3);
-
+                String sexo = miLector.GetString(4);
                 //separo el dia, mes y año de la fecha para a continuacion introducirla en el datetimePicker
                 int dia = Int32.Parse(fecha.Substring(0, 2));
                 int mes = Int32.Parse(fecha.Substring(3, 2));
@@ -366,6 +385,7 @@ namespace ProyectoCarreras
                 textBox10.Text = apellidos;
                 textBox8.Text = dni;
                 dateTimePicker2.Value = new DateTime(anio, mes, dia);
+                comboBox3.Text = sexo; 
 
                 miCnx.Close();
                 miLector.Close();
@@ -381,7 +401,6 @@ namespace ProyectoCarreras
         {
             OleDbCommand miCmd;
             OleDbConnection miCnx;
-            OleDbDataReader miLector;
             String nombre = textBox9.Text;
             String apellido = textBox10.Text;
             String dni = textBox8.Text;
@@ -391,7 +410,7 @@ namespace ProyectoCarreras
                 try
                 {
                     String conexion = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=|DataDirectory|\\corredores.mdb;Persist Security Info=True";
-                    string sentencia = "UPDATE corredores SET nombre='" + nombre + "', apellidos='" + apellido + "', dni='" + dni + "' , fecha_nac='" + dateTimePicker2.Value.ToShortDateString() + "' WHERE Id=" + comboBox1.SelectedValue + "";
+                    string sentencia = "UPDATE corredores SET nombre='" + nombre + "', apellidos='" + apellido + "', dni='" + dni + "' , fecha_nac='" + dateTimePicker2.Value.ToShortDateString() + "', sexo='" + comboBox3.Text + "'"  + "' WHERE Id=" + comboBox1.SelectedValue + "";
                     miCnx = new OleDbConnection(conexion);
                     miCmd = new OleDbCommand(sentencia, miCnx);
                     miCnx.Open();
@@ -421,7 +440,7 @@ namespace ProyectoCarreras
         public void InsertarDorsal(int numeroDorsal)
         {
             corredores.Clear();
-            ConsultaDorsal();
+            ConsultaCorredores();
             int dorNum = numeroDorsal;
             foreach (Corredor corr in corredores)
             {
@@ -430,7 +449,7 @@ namespace ProyectoCarreras
                 try
                 {
                     String conexion = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=|DataDirectory|\\corredores.mdb;Persist Security Info=True";
-                    string sentencia = "UPDATE corredores SET dorsal='" + dorNum + "' WHERE Id=" + Int32.Parse(corr.getId()) + "";
+                    string sentencia = "INSERT INTO corredor-carrera (id_corredor, id_carrera, dorsal) VALUES (" + Int32.Parse(corr.getId()) + ", 1," + dorNum + ")";
                     miCnx = new OleDbConnection(conexion);
                     miCmd = new OleDbCommand(sentencia, miCnx);
                     miCnx.Open();
@@ -450,7 +469,7 @@ namespace ProyectoCarreras
             
         }
 
-        public void ConsultaDorsal()
+        public void ConsultaCorredores()
         {
             OleDbCommand miCmd;
             OleDbConnection miCnx;
@@ -458,7 +477,7 @@ namespace ProyectoCarreras
             try
             {
                 String conexion = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=|DataDirectory|\\corredores.mdb;Persist Security Info=True";
-                string sentencia = "SELECT Id, nombre, apellidos, dni, fecha_nac from corredores";
+                string sentencia = "SELECT Id, nombre, apellidos, dni, fecha_nac from corredores where activo = true";
                 miCnx = new OleDbConnection(conexion);
                 miCmd = new OleDbCommand(sentencia, miCnx);
                 miCnx.Open();
@@ -709,6 +728,11 @@ namespace ProyectoCarreras
         {
             paneles();
             car_mod.Visible = true;
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            
         }
     }
 }

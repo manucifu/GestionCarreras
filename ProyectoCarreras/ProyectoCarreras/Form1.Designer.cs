@@ -80,16 +80,12 @@
             this.label9 = new System.Windows.Forms.Label();
             this.cli_consulta = new System.Windows.Forms.Panel();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.nombreDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.apellidosDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.fechanacDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dniDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dorsalDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tiempoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.corredoresBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.corredoresDataSet11 = new ProyectoCarreras.corredoresDataSet1();
             this.corredoresDataSet = new ProyectoCarreras.corredoresDataSet();
             this.corredoresTableAdapter = new ProyectoCarreras.corredoresDataSetTableAdapters.corredoresTableAdapter();
             this.cli_modificar = new System.Windows.Forms.Panel();
+            this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.label40 = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
             this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.textBox10 = new System.Windows.Forms.TextBox();
@@ -127,11 +123,23 @@
             this.label36 = new System.Windows.Forms.Label();
             this.label35 = new System.Windows.Forms.Label();
             this.car_activa = new System.Windows.Forms.Panel();
-            this.label37 = new System.Windows.Forms.Label();
-            this.label38 = new System.Windows.Forms.Label();
-            this.label39 = new System.Windows.Forms.Label();
             this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
+            this.label39 = new System.Windows.Forms.Label();
+            this.label38 = new System.Windows.Forms.Label();
+            this.label37 = new System.Windows.Forms.Label();
             this.car_mod = new System.Windows.Forms.Panel();
+            this.corredoresTableAdapter1 = new ProyectoCarreras.corredoresDataSet1TableAdapters.corredoresTableAdapter();
+            this.button8 = new System.Windows.Forms.Button();
+            this.corredoresDataSet2 = new ProyectoCarreras.corredoresDataSet2();
+            this.corredoresBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.corredoresTableAdapter2 = new ProyectoCarreras.corredoresDataSet2TableAdapters.corredoresTableAdapter();
+            this.idDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.apellidosDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.nombreDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dniDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sexoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.fechanacDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.activoDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.menuStrip1.SuspendLayout();
             this.dor_generar.SuspendLayout();
             this.dor_barras.SuspendLayout();
@@ -140,13 +148,15 @@
             this.cli_alta.SuspendLayout();
             this.cli_consulta.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.corredoresBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.corredoresDataSet11)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.corredoresDataSet)).BeginInit();
             this.cli_modificar.SuspendLayout();
             this.car_iniciar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.corredoresDataSet1)).BeginInit();
             this.car_alta.SuspendLayout();
             this.car_activa.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.corredoresDataSet2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.corredoresBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -158,7 +168,7 @@
             this.carreraToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(980, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(1006, 28);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -231,34 +241,34 @@
             // iniciarToolStripMenuItem
             // 
             this.iniciarToolStripMenuItem.Name = "iniciarToolStripMenuItem";
-            this.iniciarToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.iniciarToolStripMenuItem.Size = new System.Drawing.Size(179, 26);
             this.iniciarToolStripMenuItem.Text = "Iniciar";
             this.iniciarToolStripMenuItem.Click += new System.EventHandler(this.iniciarToolStripMenuItem_Click);
             // 
             // informesToolStripMenuItem
             // 
             this.informesToolStripMenuItem.Name = "informesToolStripMenuItem";
-            this.informesToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.informesToolStripMenuItem.Size = new System.Drawing.Size(179, 26);
             this.informesToolStripMenuItem.Text = "Informes";
             // 
             // altaToolStripMenuItem2
             // 
             this.altaToolStripMenuItem2.Name = "altaToolStripMenuItem2";
-            this.altaToolStripMenuItem2.Size = new System.Drawing.Size(181, 26);
+            this.altaToolStripMenuItem2.Size = new System.Drawing.Size(179, 26);
             this.altaToolStripMenuItem2.Text = "Alta";
             this.altaToolStripMenuItem2.Click += new System.EventHandler(this.altaToolStripMenuItem2_Click);
             // 
             // modificaciónToolStripMenuItem1
             // 
             this.modificaciónToolStripMenuItem1.Name = "modificaciónToolStripMenuItem1";
-            this.modificaciónToolStripMenuItem1.Size = new System.Drawing.Size(181, 26);
+            this.modificaciónToolStripMenuItem1.Size = new System.Drawing.Size(179, 26);
             this.modificaciónToolStripMenuItem1.Text = "Modificación";
             this.modificaciónToolStripMenuItem1.Click += new System.EventHandler(this.modificaciónToolStripMenuItem1_Click);
             // 
             // gestiónActivaToolStripMenuItem
             // 
             this.gestiónActivaToolStripMenuItem.Name = "gestiónActivaToolStripMenuItem";
-            this.gestiónActivaToolStripMenuItem.Size = new System.Drawing.Size(181, 26);
+            this.gestiónActivaToolStripMenuItem.Size = new System.Drawing.Size(179, 26);
             this.gestiónActivaToolStripMenuItem.Text = "Gestión Activa";
             this.gestiónActivaToolStripMenuItem.Click += new System.EventHandler(this.gestiónActivaToolStripMenuItem_Click);
             // 
@@ -284,7 +294,7 @@
             this.dor_generar.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dor_generar.Location = new System.Drawing.Point(0, 28);
             this.dor_generar.Name = "dor_generar";
-            this.dor_generar.Size = new System.Drawing.Size(980, 436);
+            this.dor_generar.Size = new System.Drawing.Size(1006, 436);
             this.dor_generar.TabIndex = 2;
             // 
             // dor_barras
@@ -320,6 +330,7 @@
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(100, 22);
             this.textBox2.TabIndex = 4;
+            this.textBox2.Visible = false;
             // 
             // textBox1
             // 
@@ -336,15 +347,16 @@
             this.label3.Size = new System.Drawing.Size(95, 17);
             this.label3.TabIndex = 2;
             this.label3.Text = "hasta número";
+            this.label3.Visible = false;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(34, 15);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(101, 17);
+            this.label2.Size = new System.Drawing.Size(94, 17);
             this.label2.TabIndex = 1;
-            this.label2.Text = "Desde número";
+            this.label2.Text = "Número inicio";
             // 
             // button1
             // 
@@ -372,7 +384,7 @@
             this.dor_consulta.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dor_consulta.Location = new System.Drawing.Point(0, 28);
             this.dor_consulta.Name = "dor_consulta";
-            this.dor_consulta.Size = new System.Drawing.Size(980, 436);
+            this.dor_consulta.Size = new System.Drawing.Size(1006, 436);
             this.dor_consulta.TabIndex = 1;
             // 
             // label22
@@ -409,6 +421,7 @@
             // 
             // textBox4
             // 
+            this.textBox4.Enabled = false;
             this.textBox4.Location = new System.Drawing.Point(453, 36);
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(100, 22);
@@ -485,7 +498,7 @@
             this.cli_alta.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cli_alta.Location = new System.Drawing.Point(0, 28);
             this.cli_alta.Name = "cli_alta";
-            this.cli_alta.Size = new System.Drawing.Size(980, 436);
+            this.cli_alta.Size = new System.Drawing.Size(1006, 436);
             this.cli_alta.TabIndex = 7;
             // 
             // comboBox2
@@ -598,71 +611,39 @@
             // 
             // cli_consulta
             // 
+            this.cli_consulta.Controls.Add(this.button8);
             this.cli_consulta.Controls.Add(this.dataGridView1);
             this.cli_consulta.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cli_consulta.Location = new System.Drawing.Point(0, 28);
             this.cli_consulta.Name = "cli_consulta";
-            this.cli_consulta.Size = new System.Drawing.Size(980, 436);
+            this.cli_consulta.Size = new System.Drawing.Size(1006, 436);
             this.cli_consulta.TabIndex = 7;
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AllowUserToAddRows = false;
+            this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.AutoGenerateColumns = false;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.nombreDataGridViewTextBoxColumn,
+            this.idDataGridViewTextBoxColumn,
             this.apellidosDataGridViewTextBoxColumn,
-            this.fechanacDataGridViewTextBoxColumn,
+            this.nombreDataGridViewTextBoxColumn,
             this.dniDataGridViewTextBoxColumn,
-            this.dorsalDataGridViewTextBoxColumn,
-            this.tiempoDataGridViewTextBoxColumn});
+            this.sexoDataGridViewTextBoxColumn,
+            this.fechanacDataGridViewTextBoxColumn,
+            this.activoDataGridViewCheckBoxColumn});
             this.dataGridView1.DataSource = this.corredoresBindingSource;
-            this.dataGridView1.Location = new System.Drawing.Point(3, 24);
+            this.dataGridView1.Location = new System.Drawing.Point(0, 0);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(965, 211);
+            this.dataGridView1.Size = new System.Drawing.Size(1006, 320);
             this.dataGridView1.TabIndex = 0;
             // 
-            // nombreDataGridViewTextBoxColumn
+            // corredoresDataSet11
             // 
-            this.nombreDataGridViewTextBoxColumn.DataPropertyName = "nombre";
-            this.nombreDataGridViewTextBoxColumn.HeaderText = "nombre";
-            this.nombreDataGridViewTextBoxColumn.Name = "nombreDataGridViewTextBoxColumn";
-            // 
-            // apellidosDataGridViewTextBoxColumn
-            // 
-            this.apellidosDataGridViewTextBoxColumn.DataPropertyName = "apellidos";
-            this.apellidosDataGridViewTextBoxColumn.HeaderText = "apellidos";
-            this.apellidosDataGridViewTextBoxColumn.Name = "apellidosDataGridViewTextBoxColumn";
-            // 
-            // fechanacDataGridViewTextBoxColumn
-            // 
-            this.fechanacDataGridViewTextBoxColumn.DataPropertyName = "fecha_nac";
-            this.fechanacDataGridViewTextBoxColumn.HeaderText = "fecha_nac";
-            this.fechanacDataGridViewTextBoxColumn.Name = "fechanacDataGridViewTextBoxColumn";
-            // 
-            // dniDataGridViewTextBoxColumn
-            // 
-            this.dniDataGridViewTextBoxColumn.DataPropertyName = "dni";
-            this.dniDataGridViewTextBoxColumn.HeaderText = "dni";
-            this.dniDataGridViewTextBoxColumn.Name = "dniDataGridViewTextBoxColumn";
-            // 
-            // dorsalDataGridViewTextBoxColumn
-            // 
-            this.dorsalDataGridViewTextBoxColumn.DataPropertyName = "dorsal";
-            this.dorsalDataGridViewTextBoxColumn.HeaderText = "dorsal";
-            this.dorsalDataGridViewTextBoxColumn.Name = "dorsalDataGridViewTextBoxColumn";
-            // 
-            // tiempoDataGridViewTextBoxColumn
-            // 
-            this.tiempoDataGridViewTextBoxColumn.DataPropertyName = "tiempo";
-            this.tiempoDataGridViewTextBoxColumn.HeaderText = "tiempo";
-            this.tiempoDataGridViewTextBoxColumn.Name = "tiempoDataGridViewTextBoxColumn";
-            // 
-            // corredoresBindingSource
-            // 
-            this.corredoresBindingSource.DataMember = "corredores";
-            this.corredoresBindingSource.DataSource = this.corredoresDataSet;
+            this.corredoresDataSet11.DataSetName = "corredoresDataSet1";
+            this.corredoresDataSet11.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // corredoresDataSet
             // 
@@ -675,6 +656,8 @@
             // 
             // cli_modificar
             // 
+            this.cli_modificar.Controls.Add(this.comboBox3);
+            this.cli_modificar.Controls.Add(this.label40);
             this.cli_modificar.Controls.Add(this.button3);
             this.cli_modificar.Controls.Add(this.dateTimePicker2);
             this.cli_modificar.Controls.Add(this.textBox10);
@@ -689,12 +672,32 @@
             this.cli_modificar.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cli_modificar.Location = new System.Drawing.Point(0, 28);
             this.cli_modificar.Name = "cli_modificar";
-            this.cli_modificar.Size = new System.Drawing.Size(980, 436);
+            this.cli_modificar.Size = new System.Drawing.Size(1006, 436);
             this.cli_modificar.TabIndex = 1;
+            // 
+            // comboBox3
+            // 
+            this.comboBox3.FormattingEnabled = true;
+            this.comboBox3.Items.AddRange(new object[] {
+            "Hombre",
+            "Mujer"});
+            this.comboBox3.Location = new System.Drawing.Point(249, 250);
+            this.comboBox3.Name = "comboBox3";
+            this.comboBox3.Size = new System.Drawing.Size(191, 24);
+            this.comboBox3.TabIndex = 12;
+            // 
+            // label40
+            // 
+            this.label40.AutoSize = true;
+            this.label40.Location = new System.Drawing.Point(152, 248);
+            this.label40.Name = "label40";
+            this.label40.Size = new System.Drawing.Size(43, 17);
+            this.label40.TabIndex = 11;
+            this.label40.Text = "Sexo:";
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(432, 297);
+            this.button3.Location = new System.Drawing.Point(419, 326);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 10;
@@ -715,21 +718,22 @@
             // 
             this.textBox10.Location = new System.Drawing.Point(251, 199);
             this.textBox10.Name = "textBox10";
-            this.textBox10.Size = new System.Drawing.Size(100, 22);
+            this.textBox10.Size = new System.Drawing.Size(189, 22);
             this.textBox10.TabIndex = 8;
             // 
             // textBox9
             // 
             this.textBox9.Location = new System.Drawing.Point(251, 154);
             this.textBox9.Name = "textBox9";
-            this.textBox9.Size = new System.Drawing.Size(100, 22);
+            this.textBox9.Size = new System.Drawing.Size(189, 22);
             this.textBox9.TabIndex = 7;
             // 
             // textBox8
             // 
             this.textBox8.Location = new System.Drawing.Point(647, 145);
+            this.textBox8.MaxLength = 9;
             this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(100, 22);
+            this.textBox8.Size = new System.Drawing.Size(139, 22);
             this.textBox8.TabIndex = 6;
             // 
             // comboBox1
@@ -807,7 +811,7 @@
             this.car_iniciar.Dock = System.Windows.Forms.DockStyle.Fill;
             this.car_iniciar.Location = new System.Drawing.Point(0, 28);
             this.car_iniciar.Name = "car_iniciar";
-            this.car_iniciar.Size = new System.Drawing.Size(980, 436);
+            this.car_iniciar.Size = new System.Drawing.Size(1006, 436);
             this.car_iniciar.TabIndex = 11;
             // 
             // label34
@@ -982,7 +986,7 @@
             this.car_alta.Dock = System.Windows.Forms.DockStyle.Fill;
             this.car_alta.Location = new System.Drawing.Point(0, 28);
             this.car_alta.Name = "car_alta";
-            this.car_alta.Size = new System.Drawing.Size(980, 436);
+            this.car_alta.Size = new System.Drawing.Size(1006, 436);
             this.car_alta.TabIndex = 12;
             // 
             // dateTimePicker3
@@ -1047,26 +1051,16 @@
             this.car_activa.Dock = System.Windows.Forms.DockStyle.Fill;
             this.car_activa.Location = new System.Drawing.Point(0, 28);
             this.car_activa.Name = "car_activa";
-            this.car_activa.Size = new System.Drawing.Size(980, 436);
+            this.car_activa.Size = new System.Drawing.Size(1006, 436);
             this.car_activa.TabIndex = 7;
             // 
-            // label37
+            // checkedListBox1
             // 
-            this.label37.AutoSize = true;
-            this.label37.Location = new System.Drawing.Point(100, 24);
-            this.label37.Name = "label37";
-            this.label37.Size = new System.Drawing.Size(58, 17);
-            this.label37.TabIndex = 0;
-            this.label37.Text = "Nombre";
-            // 
-            // label38
-            // 
-            this.label38.AutoSize = true;
-            this.label38.Location = new System.Drawing.Point(212, 24);
-            this.label38.Name = "label38";
-            this.label38.Size = new System.Drawing.Size(47, 17);
-            this.label38.TabIndex = 1;
-            this.label38.Text = "Fecha";
+            this.checkedListBox1.FormattingEnabled = true;
+            this.checkedListBox1.Location = new System.Drawing.Point(600, 62);
+            this.checkedListBox1.Name = "checkedListBox1";
+            this.checkedListBox1.Size = new System.Drawing.Size(229, 123);
+            this.checkedListBox1.TabIndex = 4;
             // 
             // label39
             // 
@@ -1077,40 +1071,127 @@
             this.label39.TabIndex = 2;
             this.label39.Text = "Activo";
             // 
-            // checkedListBox1
+            // label38
             // 
-            this.checkedListBox1.FormattingEnabled = true;
-            this.checkedListBox1.Location = new System.Drawing.Point(600, 62);
-            this.checkedListBox1.Name = "checkedListBox1";
-            this.checkedListBox1.Size = new System.Drawing.Size(229, 123);
-            this.checkedListBox1.TabIndex = 4;
+            this.label38.AutoSize = true;
+            this.label38.Location = new System.Drawing.Point(212, 24);
+            this.label38.Name = "label38";
+            this.label38.Size = new System.Drawing.Size(47, 17);
+            this.label38.TabIndex = 1;
+            this.label38.Text = "Fecha";
+            // 
+            // label37
+            // 
+            this.label37.AutoSize = true;
+            this.label37.Location = new System.Drawing.Point(100, 24);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(58, 17);
+            this.label37.TabIndex = 0;
+            this.label37.Text = "Nombre";
             // 
             // car_mod
             // 
             this.car_mod.Dock = System.Windows.Forms.DockStyle.Fill;
             this.car_mod.Location = new System.Drawing.Point(0, 28);
             this.car_mod.Name = "car_mod";
-            this.car_mod.Size = new System.Drawing.Size(980, 436);
+            this.car_mod.Size = new System.Drawing.Size(1006, 436);
             this.car_mod.TabIndex = 7;
+            // 
+            // corredoresTableAdapter1
+            // 
+            this.corredoresTableAdapter1.ClearBeforeFill = true;
+            // 
+            // button8
+            // 
+            this.button8.Location = new System.Drawing.Point(407, 364);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(146, 23);
+            this.button8.TabIndex = 1;
+            this.button8.Text = "Guardar cambios";
+            this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
+            // 
+            // corredoresDataSet2
+            // 
+            this.corredoresDataSet2.DataSetName = "corredoresDataSet2";
+            this.corredoresDataSet2.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // corredoresBindingSource
+            // 
+            this.corredoresBindingSource.DataMember = "corredores";
+            this.corredoresBindingSource.DataSource = this.corredoresDataSet2;
+            // 
+            // corredoresTableAdapter2
+            // 
+            this.corredoresTableAdapter2.ClearBeforeFill = true;
+            // 
+            // idDataGridViewTextBoxColumn
+            // 
+            this.idDataGridViewTextBoxColumn.DataPropertyName = "Id";
+            this.idDataGridViewTextBoxColumn.HeaderText = "Id";
+            this.idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
+            this.idDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // apellidosDataGridViewTextBoxColumn
+            // 
+            this.apellidosDataGridViewTextBoxColumn.DataPropertyName = "apellidos";
+            this.apellidosDataGridViewTextBoxColumn.HeaderText = "apellidos";
+            this.apellidosDataGridViewTextBoxColumn.Name = "apellidosDataGridViewTextBoxColumn";
+            this.apellidosDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // nombreDataGridViewTextBoxColumn
+            // 
+            this.nombreDataGridViewTextBoxColumn.DataPropertyName = "nombre";
+            this.nombreDataGridViewTextBoxColumn.HeaderText = "nombre";
+            this.nombreDataGridViewTextBoxColumn.Name = "nombreDataGridViewTextBoxColumn";
+            this.nombreDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // dniDataGridViewTextBoxColumn
+            // 
+            this.dniDataGridViewTextBoxColumn.DataPropertyName = "dni";
+            this.dniDataGridViewTextBoxColumn.HeaderText = "dni";
+            this.dniDataGridViewTextBoxColumn.Name = "dniDataGridViewTextBoxColumn";
+            this.dniDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // sexoDataGridViewTextBoxColumn
+            // 
+            this.sexoDataGridViewTextBoxColumn.DataPropertyName = "sexo";
+            this.sexoDataGridViewTextBoxColumn.HeaderText = "sexo";
+            this.sexoDataGridViewTextBoxColumn.Name = "sexoDataGridViewTextBoxColumn";
+            this.sexoDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // fechanacDataGridViewTextBoxColumn
+            // 
+            this.fechanacDataGridViewTextBoxColumn.DataPropertyName = "fecha_nac";
+            this.fechanacDataGridViewTextBoxColumn.HeaderText = "fecha_nac";
+            this.fechanacDataGridViewTextBoxColumn.Name = "fechanacDataGridViewTextBoxColumn";
+            this.fechanacDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // activoDataGridViewCheckBoxColumn
+            // 
+            this.activoDataGridViewCheckBoxColumn.DataPropertyName = "activo";
+            this.activoDataGridViewCheckBoxColumn.HeaderText = "activo";
+            this.activoDataGridViewCheckBoxColumn.Name = "activoDataGridViewCheckBoxColumn";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(980, 464);
+            this.ClientSize = new System.Drawing.Size(1006, 464);
+            this.Controls.Add(this.cli_consulta);
+            this.Controls.Add(this.dor_generar);
+            this.Controls.Add(this.dor_consulta);
+            this.Controls.Add(this.cli_modificar);
+            this.Controls.Add(this.cli_alta);
             this.Controls.Add(this.car_activa);
             this.Controls.Add(this.car_alta);
             this.Controls.Add(this.car_mod);
-            this.Controls.Add(this.cli_modificar);
-            this.Controls.Add(this.cli_alta);
-            this.Controls.Add(this.dor_consulta);
             this.Controls.Add(this.car_iniciar);
-            this.Controls.Add(this.dor_generar);
-            this.Controls.Add(this.cli_consulta);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MainMenuStrip = this.menuStrip1;
+            this.MaximizeBox = false;
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -1126,7 +1207,7 @@
             this.cli_alta.PerformLayout();
             this.cli_consulta.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.corredoresBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.corredoresDataSet11)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.corredoresDataSet)).EndInit();
             this.cli_modificar.ResumeLayout(false);
             this.cli_modificar.PerformLayout();
@@ -1137,6 +1218,8 @@
             this.car_alta.PerformLayout();
             this.car_activa.ResumeLayout(false);
             this.car_activa.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.corredoresDataSet2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.corredoresBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1187,14 +1270,7 @@
         private System.Windows.Forms.Panel cli_consulta;
         private System.Windows.Forms.DataGridView dataGridView1;
         private corredoresDataSet corredoresDataSet;
-        private System.Windows.Forms.BindingSource corredoresBindingSource;
         private corredoresDataSetTableAdapters.corredoresTableAdapter corredoresTableAdapter;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nombreDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn apellidosDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn fechanacDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dniDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dorsalDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn tiempoDataGridViewTextBoxColumn;
         private System.Windows.Forms.Panel cli_modificar;
         private System.Windows.Forms.DateTimePicker dateTimePicker2;
         private System.Windows.Forms.TextBox textBox10;
@@ -1247,6 +1323,21 @@
         private System.Windows.Forms.Label label37;
         private System.Windows.Forms.CheckedListBox checkedListBox1;
         private System.Windows.Forms.Panel car_mod;
+        private corredoresDataSet1 corredoresDataSet11;
+        private corredoresDataSet1TableAdapters.corredoresTableAdapter corredoresTableAdapter1;
+        private System.Windows.Forms.ComboBox comboBox3;
+        private System.Windows.Forms.Label label40;
+        private System.Windows.Forms.Button button8;
+        private corredoresDataSet2 corredoresDataSet2;
+        private System.Windows.Forms.BindingSource corredoresBindingSource;
+        private corredoresDataSet2TableAdapters.corredoresTableAdapter corredoresTableAdapter2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn apellidosDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nombreDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dniDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sexoDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn fechanacDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn activoDataGridViewCheckBoxColumn;
     }
 }
 

@@ -60,6 +60,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>corredoresDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="corredoresDataSet1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>corredoresDataSet1.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="corredoresDataSet2.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>corredoresDataSet2.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -90,6 +100,28 @@
     </None>
     <None Include="corredoresDataSet.xss">
       <DependentUpon>corredoresDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="corredoresDataSet1.xsc">
+      <DependentUpon>corredoresDataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="corredoresDataSet1.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>corredoresDataSet1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="corredoresDataSet1.xss">
+      <DependentUpon>corredoresDataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="corredoresDataSet2.xsc">
+      <DependentUpon>corredoresDataSet2.xsd</DependentUpon>
+    </None>
+    <None Include="corredoresDataSet2.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>corredoresDataSet2.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="corredoresDataSet2.xss">
+      <DependentUpon>corredoresDataSet2.xsd</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
