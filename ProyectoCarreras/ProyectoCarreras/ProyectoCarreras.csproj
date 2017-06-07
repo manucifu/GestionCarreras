@@ -70,12 +70,14 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>corredoresDataSet2.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Corredor_carrera.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="List.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">

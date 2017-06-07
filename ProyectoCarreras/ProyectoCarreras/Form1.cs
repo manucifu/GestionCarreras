@@ -105,7 +105,7 @@ namespace ProyectoCarreras
 
         private void button2_Click(object sender, EventArgs e)
         {
-            int vueltas = Int32.Parse(textBox2.Text) - Int32.Parse(textBox1.Text);
+            int vueltas = corredores.Count;
             SaveFileDialog svg = new SaveFileDialog();
             svg.ShowDialog();
 
@@ -149,6 +149,9 @@ namespace ProyectoCarreras
         String valor;
         private void button3_Click(object sender, EventArgs e)
         {
+            textBox5.Enabled = false;
+            textBox6.Enabled = false;
+            comboBox2.Enabled = false;
             valor = textBox7.Text;
             OleDbCommand miCmd;
             OleDbConnection miCnx;
@@ -218,7 +221,6 @@ namespace ProyectoCarreras
 
                 textBox5.Enabled = false;
                 textBox6.Enabled = false;
-                textBox7.Enabled = false;
                 dateTimePicker1.Enabled = false;
                 comboBox2.Enabled = false;
             }
@@ -313,7 +315,7 @@ namespace ProyectoCarreras
         {
             paneles();
             cli_consulta.Visible = true;
-            this.corredoresTableAdapter1.Fill(this.corredoresDataSet11.corredores);
+            this.corredoresTableAdapter2.Fill(this.corredoresDataSet2.corredores);
             dataGridView1.Columns[0].Visible = false;
 
         }
@@ -410,7 +412,7 @@ namespace ProyectoCarreras
                 try
                 {
                     String conexion = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=|DataDirectory|\\corredores.mdb;Persist Security Info=True";
-                    string sentencia = "UPDATE corredores SET nombre='" + nombre + "', apellidos='" + apellido + "', dni='" + dni + "' , fecha_nac='" + dateTimePicker2.Value.ToShortDateString() + "', sexo='" + comboBox3.Text + "'"  + "' WHERE Id=" + comboBox1.SelectedValue + "";
+                    string sentencia = "UPDATE corredores SET nombre='" + nombre + "', apellidos='" + apellido + "', dni='" + dni + "' , fecha_nac='" + dateTimePicker2.Value.ToShortDateString() + "', sexo='" + comboBox3.Text + "' WHERE Id=" + comboBox1.SelectedValue + "";
                     miCnx = new OleDbConnection(conexion);
                     miCmd = new OleDbCommand(sentencia, miCnx);
                     miCnx.Open();
@@ -418,12 +420,13 @@ namespace ProyectoCarreras
                     miCnx.Close();
 
                     ComboDoble();
+                    MessageBox.Show("Corredor modificado");
                 }
                 catch (OleDbException err3)
                 {
-                    MessageBox.Show("Error con la base de datos " + err3);
+                    MessageBox.Show("Hay datos de una carrera anterior, borralos antes de continuar");
                 }
-                MessageBox.Show("Corredor modificado");
+                
             }
             else
             {
@@ -449,14 +452,14 @@ namespace ProyectoCarreras
                 try
                 {
                     String conexion = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=|DataDirectory|\\corredores.mdb;Persist Security Info=True";
-                    string sentencia = "INSERT INTO corredor-carrera (id_corredor, id_carrera, dorsal) VALUES (" + Int32.Parse(corr.getId()) + ", 1," + dorNum + ")";
+                    string sentencia = "INSERT INTO corredor_carrera (id_corredor, id_carrera, dorsal) VALUES(" + Int32.Parse(corr.getId()) + ", 1," + dorNum + ")";
                     miCnx = new OleDbConnection(conexion);
                     miCmd = new OleDbCommand(sentencia, miCnx);
                     miCnx.Open();
                     miCmd.ExecuteNonQuery();
                     miCnx.Close();
 
-                    ComboDoble();
+                    //ComboDoble();
                 }
                 catch (OleDbException err3)
                 {
@@ -511,7 +514,7 @@ namespace ProyectoCarreras
             try
             {
                 String conexion = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=|DataDirectory|\\corredores.mdb;Persist Security Info=True";
-                string sentencia = "SELECT nombre, apellidos, dni, fecha_nac from corredores WHERE dorsal = '" + textBox4.Text + "'";
+                string sentencia = "SELECT nombre, apellidos, dni, fecha_nac from corredor WHERE dorsal = '" + textBox4.Text + "'";
                 miCnx = new OleDbConnection(conexion);
                 miCmd = new OleDbCommand(sentencia, miCnx);
                 miCnx.Open();
@@ -601,7 +604,7 @@ namespace ProyectoCarreras
             try
             {
                 String conexion = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=|DataDirectory|\\corredores.mdb;Persist Security Info=True";
-                string sentencia = "UPDATE corredores SET tiempo='" + label31.Text + "' WHERE dorsal='" + label34.Text + "'";
+                string sentencia = "UPDATE corredor_carrera SET tiempo='" + label31.Text + "' WHERE dorsal=" + Int32.Parse(label34.Text) + "";
                 miCnx = new OleDbConnection(conexion);
                 miCmd = new OleDbCommand(sentencia, miCnx);
                 miCnx.Open();
@@ -624,16 +627,14 @@ namespace ProyectoCarreras
             try
             {
                 String conexion = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=|DataDirectory|\\corredores.mdb;Persist Security Info=True";
-                string sentencia = "SELECT nombre, apellidos, dni from corredores WHERE dorsal = '" + label34.Text + "'";
+                string sentencia = "SELECT id_corredor from corredor_carrera WHERE dorsal = " + Int32.Parse(label34.Text) + "";
                 miCnx = new OleDbConnection(conexion);
                 miCmd = new OleDbCommand(sentencia, miCnx);
                 miCnx.Open();
                 miLector = miCmd.ExecuteReader();
                 miLector.Read();
 
-                label28.Text = miLector.GetString(0);
-                label29.Text = miLector.GetString(1);
-                label30.Text = miLector.GetString(2);
+                label41.Text = miLector.GetInt32(0).ToString();
 
                 miCnx.Close();
                 miLector.Close();
@@ -650,42 +651,49 @@ namespace ProyectoCarreras
         {
             if (e.KeyChar == (char)Keys.Enter)
             {
-                OleDbCommand miCmd;
-                OleDbConnection miCnx;
-                OleDbDataReader miLector;
-                try
+                if (VerificarNIF(textBox7.Text.ToString()))
                 {
-                    String conexion = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=|DataDirectory|\\corredores.mdb;Persist Security Info=True";
-                    string sentencia = "SELECT nombre, apellidos, fecha_nac, sexo from corredores WHERE dni = '" + textBox7.Text + "'";
-                    miCnx = new OleDbConnection(conexion);
-                    miCmd = new OleDbCommand(sentencia, miCnx);
-                    miCnx.Open();
-                    miLector = miCmd.ExecuteReader();
-                    miLector.Read();
+                    OleDbCommand miCmd;
+                    OleDbConnection miCnx;
+                    OleDbDataReader miLector;
+                    try
+                    {
+                        String conexion = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=|DataDirectory|\\corredores.mdb;Persist Security Info=True";
+                        string sentencia = "SELECT nombre, apellidos, fecha_nac, sexo from corredores WHERE dni = '" + textBox7.Text + "'";
+                        miCnx = new OleDbConnection(conexion);
+                        miCmd = new OleDbCommand(sentencia, miCnx);
+                        miCnx.Open();
+                        miLector = miCmd.ExecuteReader();
+                        miLector.Read();
 
-                    textBox5.Text = miLector.GetString(0);
-                    textBox6.Text = miLector.GetString(1);
-                    String fecha = miLector.GetString(2);
-                    int dia = Int32.Parse(fecha.Substring(0, 2));
-                    int mes = Int32.Parse(fecha.Substring(3, 2));
-                    int anio = Int32.Parse(fecha.Substring(6, 4));
-                    dateTimePicker1.Value = new DateTime(anio, mes, dia);
+                        textBox5.Text = miLector.GetString(0);
+                        textBox6.Text = miLector.GetString(1);
+                        String fecha = miLector.GetString(2);
+                        int dia = Int32.Parse(fecha.Substring(0, 2));
+                        int mes = Int32.Parse(fecha.Substring(3, 2));
+                        int anio = Int32.Parse(fecha.Substring(6, 4));
+                        dateTimePicker1.Value = new DateTime(anio, mes, dia);
 
-                    miCnx.Close();
-                    miLector.Close();
-                    ExisteCorredor = true;
+                        miCnx.Close();
+                        miLector.Close();
+                        ExisteCorredor = true;
 
-                }
-                catch (Exception err3)
+                    }
+                    catch (Exception err3)
+                    {
+                        MessageBox.Show("No existe el corredor, agrege uno nuevo");
+                        Console.Write(err3);
+                        textBox5.Enabled = true;
+                        textBox6.Enabled = true;
+                        comboBox2.Enabled = true;
+                        dateTimePicker1.Enabled = true;
+                        ExisteCorredor = false;
+                    }
+                }else
                 {
-                    MessageBox.Show("No existe el corredor, agrege uno nuevo");
-                    Console.Write(err3);
-                    textBox5.Enabled = true;
-                    textBox6.Enabled = true;
-                    comboBox2.Enabled = true;
-                    dateTimePicker1.Enabled = true;
-                    ExisteCorredor = false;
+                    MessageBox.Show("DNI no valido");
                 }
+                
             }
         }
 
@@ -732,7 +740,152 @@ namespace ProyectoCarreras
 
         private void button8_Click(object sender, EventArgs e)
         {
+            List<int, int> list = new List<int, int>();
+
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                Boolean primero = true;
+                int id = 0;
+                bool activo = false;
+                foreach (DataGridViewCell cell in row.Cells)
+                {
+                    //int id = 0;
+                    
+                    if (primero)
+                    {
+                        primero = false;
+                        id = int.Parse(cell.Value.ToString());
+                    }
+                    if(cell.Value.ToString().Equals("False"))
+                    {
+                        activo = false;
+                    }else if(cell.Value.ToString().Equals("True")) {
+                        activo = true;
+                    }          
+                }
+
+                if (id != 0)
+                {
+                    OleDbCommand miCmd;
+                    OleDbConnection miCnx;
+                    try
+                    {
+                        String conexion = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=|DataDirectory|\\corredores.mdb;Persist Security Info=True";
+                        string sentencia = "UPDATE corredores SET activo=" + activo + " WHERE Id=" + id + "";
+                        miCnx = new OleDbConnection(conexion);
+                        miCmd = new OleDbCommand(sentencia, miCnx);
+                        miCnx.Open();
+                        miCmd.ExecuteNonQuery();
+                        miCnx.Close();
+
+                    }
+                    catch (OleDbException err3)
+                    {
+                        MessageBox.Show("Error con la base de datos " + err3);
+                    }
+                }
+            }
+        }
+
+        private void label41_TextChanged(object sender, EventArgs e)
+        {
+            OleDbCommand miCmd;
+            OleDbConnection miCnx;
+            OleDbDataReader miLector;
+            try
+            {
+                String conexion = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=|DataDirectory|\\corredores.mdb;Persist Security Info=True";
+                string sentencia = "SELECT nombre, apellidos, dni from corredores WHERE id = " + Int32.Parse(label41.Text) + "";
+                miCnx = new OleDbConnection(conexion);
+                miCmd = new OleDbCommand(sentencia, miCnx);
+                miCnx.Open();
+                miLector = miCmd.ExecuteReader();
+                miLector.Read();
+
+                label29.Text = miLector.GetString(1);
+                label30.Text = miLector.GetString(2);
+                label28.Text = miLector.GetString(0);
+
+                miCnx.Close();
+                miLector.Close();
+
+            }
+            catch (Exception err3)
+            {
+                //MessageBox.Show("Error, no existe registro");
+                Console.Write(err3);
+            }
+        }
+        List<Corredor_carrera> corredor_carrera = new List<Corredor_carrera>();
+        private void button5_Click(object sender, EventArgs e)
+        {
+            SetTiempo();
+            timer1.Stop();
+            lbl_tiempo.Text = "00:00:00";
+
+        }
+        private void SetTiempo()
+        {
+            corredor_carrera.Clear();
+            ConsultaNoTerminado();
             
+            foreach (Corredor_carrera corr in corredor_carrera)
+            {
+                OleDbCommand miCmd;
+                OleDbConnection miCnx;
+                try
+                {
+                    String conexion = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=|DataDirectory|\\corredores.mdb;Persist Security Info=True";
+                    string sentencia = "UPDATE corredor_carrera SET tiempo='" + lbl_tiempo.Text + "' WHERE id_corredor=" + corr.Id_corredor + "";
+                    miCnx = new OleDbConnection(conexion);
+                    miCmd = new OleDbCommand(sentencia, miCnx);
+                    miCnx.Open();
+                    miCmd.ExecuteNonQuery();
+                    miCnx.Close();
+
+                    //ComboDoble();
+                }
+                catch (OleDbException err3)
+                {
+                    //MessageBox.Show("Error con la base de datos " + err3);
+                }
+            }
+        }
+
+        private void ConsultaNoTerminado()
+        {
+            OleDbCommand miCmd;
+            OleDbConnection miCnx;
+            OleDbDataReader miLector;
+            try
+            {
+                String conexion = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=|DataDirectory|\\corredores.mdb;Persist Security Info=True";
+                string sentencia = "SELECT id_corredor, id_carrera from corredor_carrera WHERE ((tiempo) IS NULL) ";
+                miCnx = new OleDbConnection(conexion);
+                miCmd = new OleDbCommand(sentencia, miCnx);
+                miCnx.Open();
+                miLector = miCmd.ExecuteReader();
+
+                while (miLector.Read())
+                {
+                    Corredor_carrera corr2 = new Corredor_carrera();
+                    corr2.Id_corredor = miLector.GetInt32(0);
+                    corr2.Id_carrera = miLector.GetInt32(1);
+                    corredor_carrera.Add(corr2);
+                }
+                miCnx.Close();
+                miLector.Close();
+            }
+            catch (Exception err3)
+            {
+                //MessageBox.Show("Error, no existe registro");
+                Console.Write(err3);
+            }
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

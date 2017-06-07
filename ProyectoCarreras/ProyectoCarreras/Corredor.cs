@@ -8,14 +8,13 @@ namespace ProyectoCarreras
 {
     class Corredor
     {
-        private String id , nombre, apellidos, dni, dorsal, fecha_nac;
+        private String id , nombre, apellidos, dni, fecha_nac;
         public Corredor(String id, String nombre, String apellidos, String dni, String dorsal, String fecha_nac)
         {
             this.id = id;
             this.nombre = nombre;
             this.apellidos = apellidos;
             this.dni = dni;
-            this.dorsal = dorsal;
             this.fecha_nac = fecha_nac;
         }
 
@@ -60,17 +59,6 @@ namespace ProyectoCarreras
         {
             this.dni = dni;
         }
-
-        public String getDorsal()
-        {
-            return dorsal;
-        }
-
-        public void setDorsal(String dorsal)
-        {
-            this.dorsal = dorsal;
-        }
-
         public String getFecha_nac()
         {
             return fecha_nac;
@@ -83,7 +71,7 @@ namespace ProyectoCarreras
 
         public override string ToString()
         {
-            return this.nombre + this.apellidos + this.apellidos + this.dorsal ;
+            return this.nombre + this.apellidos + this.apellidos ;
         }
     }
 }
